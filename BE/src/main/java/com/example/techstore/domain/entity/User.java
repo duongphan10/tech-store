@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +17,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User extends DateAuditing {
-
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -31,12 +31,23 @@ public class User extends DateAuditing {
     private String password;
 
     @Nationalized
-    @Column(nullable = false)
-    private String firstName;
+    @Column(nullable = true)
+    private String fullName;
 
-    @Nationalized
-    @Column(nullable = false)
-    private String lastName;
+    @Column(nullable = true)
+    private String gender;
+
+    @Column(nullable = true)
+    private LocalDate birthday;
+
+    @Column(nullable = false, unique = true)
+    private String phone;
+
+    @Column(nullable = true)
+    private String email;
+
+    @Column(nullable = true)
+    private String avatar;
 
     //Link to table Role
     @ManyToOne

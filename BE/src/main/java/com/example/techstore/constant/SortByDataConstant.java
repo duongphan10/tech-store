@@ -6,10 +6,18 @@ public enum SortByDataConstant implements SortByInterface {
         @Override
         public String getSortBy(String sortBy) {
             switch (sortBy) {
-                case "firstName":
-                    return "first_name";
-                case "lastName":
-                    return "last_name";
+                case "fullName":
+                    return "full_name";
+                case "username":
+                    return "username";
+                case "gender":
+                    return "gender";
+                case "birthday":
+                    return "birthday";
+                case "phone":
+                    return "phone";
+                case "email":
+                    return "email";
                 case "lastModifiedDate":
                     return "last_modified_date";
                 default:

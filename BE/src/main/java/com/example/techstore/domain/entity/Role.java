@@ -15,13 +15,15 @@ import java.util.Set;
 @Entity
 @Table(name = "roles")
 public class Role {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = true)
+    private String description;
 
     //Link to table User
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
