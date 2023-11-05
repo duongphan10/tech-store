@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -29,9 +30,9 @@ public class UploadFileUtil {
         }
     }
 
-    public String uploadImage(byte[] bytes) {
+    public String uploadImage(MultipartFile file) {
         try {
-            Map<?, ?> result = cloudinary.uploader().upload(bytes, ObjectUtils.asMap("resource_type", "image"));
+            Map<?, ?> result = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap("resource_type", "image"));
             return result.get("secure_url").toString();
         } catch (IOException e) {
             throw new UploadFileException("Upload image failed!");
@@ -43,10 +44,30 @@ public class UploadFileUtil {
         int endIndex = url.lastIndexOf(".");
         String publicId = url.substring(startIndex, endIndex);
         try {
-            Map<?, ?> result = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
-            log.info(String.format("Destroy image public id %s %s", publicId, result.toString()));
+            Map<String, String> params = new HashMap<>();
+            if (url.contains("/video/")) {
+                params.put("resource_type", "video");
+            } else {
+                if (url.contains("/image/")) {
+                    params.put("resource_type", "image");
+                }
+            }
+            Map<?, ?> result = cloudinary.uploader().destroy(publicId, params);
+            log.info(String.format("Destroy file public id %s %s", publicId, result.toString()));
         } catch (IOException e) {
             throw new UploadFileException("Remove file failed!");
+        }
+    }
+
+    public void destroyImageWithUrl(String url) {
+        int startIndex = url.lastIndexOf("/") + 1;
+        int endIndex = url.lastIndexOf(".");
+        String publicId = url.substring(startIndex, endIndex);
+        try {
+            Map<?, ?> result = cloudinary.uploader().destroy(publicId, ObjectUtils.asMap("resource_type", "image"));
+            log.info(String.format("Destroy image public id %s %s", publicId, result.toString()));
+        } catch (IOException e) {
+            throw new UploadFileException("Remove image failed!");
         }
     }
 
