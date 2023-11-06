@@ -2,6 +2,7 @@ package com.example.techstore.service.impl;
 
 import com.example.techstore.constant.ErrorMessage;
 import com.example.techstore.constant.MessageConstant;
+import com.example.techstore.constant.RoleConstant;
 import com.example.techstore.domain.dto.request.AddressRequestDto;
 import com.example.techstore.domain.dto.response.AddressDto;
 import com.example.techstore.domain.dto.response.CommonResponseDto;
@@ -28,9 +29,19 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDto getById(String id, String userId) {
+        User user = userService.getById(userId);
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Address.ERR_NOT_FOUND_ID, new String[]{id}));
+        if (!address.getCreatedBy().equals(userId) && !user.getRole().getName().equals(RoleConstant.ADMIN)) {
+            throw new ForbiddenException(ErrorMessage.FORBIDDEN);
+        }
         return addressMapper.mapAddressToAddressDto(address);
+    }
+
+    @Override
+    public List<AddressDto> getAllByCurrentUserId(String userId) {
+        List<Address> addresses = addressRepository.getAllByUserId(userId);
+        return addressMapper.mapAddressesToAddressDtos(addresses);
     }
 
     @Override
@@ -41,7 +52,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public AddressDto getDefaultByUserId(String userId) {
+    public AddressDto getDefaultByCurrentUser(String userId) {
         Address address = addressRepository.getDefaultByUserId(userId);
         return addressMapper.mapAddressToAddressDto(address);
     }

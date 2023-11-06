@@ -9,9 +9,11 @@ import java.util.List;
 public interface AddressService {
     AddressDto getById(String id, String userId);
 
+    List<AddressDto> getAllByCurrentUserId(String userId);
+
     List<AddressDto> getAllByUserId(String userId);
 
-    AddressDto getDefaultByUserId(String userId);
+    AddressDto getDefaultByCurrentUser(String userId);
 
     AddressDto create(AddressRequestDto addressRequestDto, String userId);
 

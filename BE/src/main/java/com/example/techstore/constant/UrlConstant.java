@@ -29,6 +29,7 @@ public class UrlConstant {
         private static final String PRE_FIX = "/address";
         public static final String GET_BY_ID = PRE_FIX + "/{id}";
         public static final String GET_ALL = PRE_FIX + "/all";
+        public static final String GET_ALL_BY_USE_ID = PRE_FIX + "/all/{userId}";
         public static final String GET_DEFAULT = PRE_FIX + "/default";
         public static final String CREATE = PRE_FIX + "/create";
         public static final String UPDATE_BY_ID = PRE_FIX + "/{id}";

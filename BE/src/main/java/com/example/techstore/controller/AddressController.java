@@ -31,11 +31,18 @@ public class AddressController {
     }
 
     @Tag(name = "address-controller")
-    @Operation(summary = "API get all address by user id")
+    @Operation(summary = "API get all address current user")
     @GetMapping(UrlConstant.Address.GET_ALL)
     public ResponseEntity<?> getAllAddress(@Parameter(name = "principal", hidden = true)
                                            @CurrentUser UserPrincipal user) {
-        return VsResponseUtil.success(addressService.getAllByUserId(user.getId()));
+        return VsResponseUtil.success(addressService.getAllByCurrentUserId(user.getId()));
+    }
+
+    @Tag(name = "address-controller")
+    @Operation(summary = "API get all address by user id")
+    @GetMapping(UrlConstant.Address.GET_ALL_BY_USE_ID)
+    public ResponseEntity<?> getAllAddressByUserId(@PathVariable String userId) {
+        return VsResponseUtil.success(addressService.getAllByUserId(userId));
     }
 
     @Tag(name = "address-controller")
@@ -43,7 +50,7 @@ public class AddressController {
     @GetMapping(UrlConstant.Address.GET_DEFAULT)
     public ResponseEntity<?> getAddressDefault(@Parameter(name = "principal", hidden = true)
                                                @CurrentUser UserPrincipal user) {
-        return VsResponseUtil.success(addressService.getDefaultByUserId(user.getId()));
+        return VsResponseUtil.success(addressService.getDefaultByCurrentUser(user.getId()));
     }
 
     @Tag(name = "address-controller")
