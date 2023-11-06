@@ -1,5 +1,6 @@
 package com.example.techstore.util;
 
+import com.example.techstore.exception.UploadFileException;
 import lombok.SneakyThrows;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -101,6 +102,17 @@ public class FileUtil {
             throw new IOException("Could not save file: " + fileName);
         }
         return newFile;
+    }
+
+    public static void deleteFile(String image, String savePath) {
+        Path path = Paths.get(RESOURCES_PATH + "/" + savePath + "/" + image);
+        try {
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+        } catch (IOException e) {
+            throw new UploadFileException("Could not delete file: " + image);
+        }
     }
 
     /**
