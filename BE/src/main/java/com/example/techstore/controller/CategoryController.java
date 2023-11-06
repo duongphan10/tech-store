@@ -53,8 +53,7 @@ public class CategoryController {
     @Tag(name = "category-controller")
     @Operation(summary = "API delete category")
     @DeleteMapping(UrlConstant.Category.DELETE)
-    public ResponseEntity<?> deleteCategory(@Parameter(name = "principal", hidden = true)
-                                                @CurrentUser UserPrincipal user,@PathVariable String id) {
-        return VsResponseUtil.success(categoryService.deleteById(id,user.getId()));
+    public ResponseEntity<?> deleteCategory(@PathVariable String id) {
+        return VsResponseUtil.success(categoryService.deleteById(id));
     }
 }

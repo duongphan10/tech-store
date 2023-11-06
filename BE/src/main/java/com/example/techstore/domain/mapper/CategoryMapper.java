@@ -15,10 +15,11 @@ public interface CategoryMapper {
     Category mapCategoryCreateDtoToCategory(CategoryRequestDto createDto);
 
     CategoryDto mapCategoryToCategoryDto(Category category);
+
     List<CategoryDto> mapCategoryToCategoryDto(List<Category> categories);
+
     @Mappings({
             @Mapping(target = "avatar", ignore = true)
     })
-
     void updateCategory(@MappingTarget Category category, CategoryRequestDto updateDto);
 }

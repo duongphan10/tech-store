@@ -7,7 +7,6 @@ import com.example.techstore.domain.dto.response.CategoryDto;
 import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.entity.Category;
 import com.example.techstore.domain.mapper.CategoryMapper;
-import com.example.techstore.exception.ForbiddenException;
 import com.example.techstore.exception.NotFoundException;
 import com.example.techstore.repository.CategoryRepository;
 import com.example.techstore.service.CategoryService;
@@ -56,16 +55,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CommonResponseDto deleteById(String id,String userId) {
+    public CommonResponseDto deleteById(String id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID, new String[]{id}));
-
-        if(!userId.equals(categoryRepository.findUserCreate(id))){
-            throw new ForbiddenException(ErrorMessage.FORBIDDEN_UPDATE_DELETE);
-        }
-
         categoryRepository.delete(category);
         return new CommonResponseDto(true, MessageConstant.DELETE_CATEGORY_SUCCESSFULLY);
     }
-
 }
