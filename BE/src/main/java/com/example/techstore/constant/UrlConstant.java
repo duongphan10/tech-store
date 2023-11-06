@@ -25,4 +25,18 @@ public class UrlConstant {
         }
     }
 
+    public static class Address {
+        private static final String PRE_FIX = "/address";
+        public static final String GET_BY_ID = PRE_FIX + "/{id}";
+        public static final String GET_ALL = PRE_FIX + "/all";
+        public static final String GET_DEFAULT = PRE_FIX + "/default";
+        public static final String CREATE = PRE_FIX + "/create";
+        public static final String UPDATE_BY_ID = PRE_FIX + "/{id}";
+        public static final String CHANGE_DEFAULT_BY_ID = PRE_FIX + "/default/{id}";
+        public static final String DELETE_BY_ID = PRE_FIX + "/{id}";
+        public Address() {
+        }
+    }
+
+
 }

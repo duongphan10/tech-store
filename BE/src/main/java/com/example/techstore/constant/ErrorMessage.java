@@ -35,4 +35,9 @@ public class ErrorMessage {
         public static final String ERR_ALREADY_EXIST_USERNAME = "exception.user.already.exist.username";
     }
 
+    public static class Address {
+        public static final String ERR_NOT_FOUND_ID = "exception.address.not.found.id";
+        public static final String ERR_CANCEL_DEFAULT = "exception.address.cancel.default";
+    }
+
 }

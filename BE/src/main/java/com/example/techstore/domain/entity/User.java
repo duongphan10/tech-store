@@ -8,6 +8,7 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -54,4 +55,6 @@ public class User extends DateAuditing {
     @JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_USER_ROLE"))
     private Role role;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Address> addresses;
 }
