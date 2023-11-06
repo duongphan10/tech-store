@@ -40,4 +40,9 @@ public class ErrorMessage {
         public static final String ERR_CANCEL_DEFAULT = "exception.address.cancel.default";
     }
 
+    public static class Category {
+        public static final String ERR_NOT_FOUND_ID = "exception.category.not.found.id";
+
+    }
+
 }
