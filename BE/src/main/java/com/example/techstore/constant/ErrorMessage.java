@@ -35,4 +35,8 @@ public class ErrorMessage {
         public static final String ERR_ALREADY_EXIST_USERNAME = "exception.user.already.exist.username";
     }
 
+    public static class Category {
+        public static final String ERR_NOT_FOUND_ID = "exception.category.not.found.id";
+    }
+
 }
