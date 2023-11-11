@@ -1,10 +1,13 @@
 package com.example.techstore.domain.entity;
 
 import com.example.techstore.domain.entity.common.UserDateAuditing;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "categories")
 @AllArgsConstructor
@@ -27,5 +30,8 @@ public class Category extends UserDateAuditing {
 
     @Column(nullable = true)
     private String description;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    private List<Product> products;
 
 }

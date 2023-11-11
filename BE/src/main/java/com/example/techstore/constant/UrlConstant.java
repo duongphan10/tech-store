@@ -50,4 +50,16 @@ public class UrlConstant {
         }
     }
 
+    public  static class Product{
+        private static final String PRE_FIX = "/product";
+        public static final String GET_BY_ID = PRE_FIX + "/{id}";
+        public static final String GET_ALL = PRE_FIX + "/all";
+        public static final String GET_ALL_BY_CATEGORY_ID = PRE_FIX + "/all/category/{categoryId}";
+        public static final String CREATE = PRE_FIX + "/create";
+        public static final String UPDATE = PRE_FIX + "/{id}";
+        public static final String DELETE = PRE_FIX + "/{id}";
+        private Product(){
+        }
+    }
+
 }
