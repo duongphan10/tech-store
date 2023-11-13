@@ -1,6 +1,5 @@
 package com.example.techstore.service.impl;
 
-import com.example.techstore.constant.CommonConstant;
 import com.example.techstore.constant.ErrorMessage;
 import com.example.techstore.constant.MessageConstant;
 import com.example.techstore.constant.SortByDataConstant;
@@ -10,10 +9,8 @@ import com.example.techstore.domain.dto.pagination.PagingMeta;
 import com.example.techstore.domain.dto.request.NewsRequestDto;
 import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.dto.response.NewsDto;
-import com.example.techstore.domain.dto.response.UserDto;
 import com.example.techstore.domain.entity.Category;
 import com.example.techstore.domain.entity.News;
-import com.example.techstore.domain.entity.User;
 import com.example.techstore.domain.mapper.NewsMapper;
 import com.example.techstore.exception.NotFoundException;
 import com.example.techstore.repository.CategoryRepository;
@@ -23,10 +20,11 @@ import com.example.techstore.util.PaginationUtil;
 import com.example.techstore.util.UploadFileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.mail.Message;
 import java.util.List;
 
 @Service
@@ -45,26 +43,27 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<NewsDto> getByStatus(Boolean status) {
+    public PaginationResponseDto<NewsDto> getByStatus(PaginationFullRequestDto paginationFullRequestDto, Boolean status) {
+        Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.NEWS);
         List<News> newsList = newsRepository.getByStatus(status);
-        if(newsList.size() == 0){
-            throw new NotFoundException(ErrorMessage.News.ERR_NOT_FOUND_STATUS,new String[]{status.toString()});
+        Page<News> newsPage = new PageImpl<>(newsList, pageable, newsList.size());
+
+        if (newsPage.isEmpty()) {
+            throw new NotFoundException(ErrorMessage.News.ERR_NOT_FOUND_STATUS, new String[]{status.toString()});
         }
-        return newsMapper.mapNewsToNewsDto(newsList);
+        PagingMeta meta = PaginationUtil.buildPagingMeta(paginationFullRequestDto, SortByDataConstant.NEWS, newsPage);
+        List<NewsDto> newsDtoList = newsMapper.mapNewsToNewsDto(newsPage.getContent());
+        return new PaginationResponseDto<>(meta, newsDtoList);
     }
 
     @Override
     public PaginationResponseDto<NewsDto> getAll(PaginationFullRequestDto paginationFullRequestDto) {
-
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.NEWS);
-
-        //Create Output
         Page<News> newsPage = newsRepository.getAll(pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.NEWS, newsPage);
 
-        List<NewsDto> newsDto =
-                newsMapper.mapNewsToNewsDto(newsPage.getContent());
+        List<NewsDto> newsDto = newsMapper.mapNewsToNewsDto(newsPage.getContent());
         return new PaginationResponseDto<>(meta, newsDto);
     }
 
@@ -87,11 +86,14 @@ public class NewsServiceImpl implements NewsService {
         Category category = categoryRepository.findById(updateDto.getCategoryId())
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID,
                         new String[]{updateDto.getCategoryId()}));
-
         newsMapper.updateNews(news,updateDto);
-        uploadFileUtil.destroyImageWithUrl(news.getAvatar());
-        news.setAvatar(uploadFileUtil.uploadImage(updateDto.getAvatar()));
-        news.setCategory(category);
+
+        MultipartFile multipartFile = updateDto.getAvatar();
+        if (multipartFile != null && !multipartFile.isEmpty()){
+            uploadFileUtil.destroyImageWithUrl(news.getAvatar());
+            news.setAvatar(uploadFileUtil.uploadImage(updateDto.getAvatar()));
+            news.setCategory(category);
+        }
         return newsMapper.mapNewsToNewsDto(newsRepository.save(news));
     }
 
@@ -102,8 +104,4 @@ public class NewsServiceImpl implements NewsService {
         newsRepository.delete(news);
         return new CommonResponseDto(true, MessageConstant.DELETE_NEWS_SUCCESSFULLY);
     }
-
-
-
-
 }

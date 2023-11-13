@@ -2,14 +2,9 @@ package com.example.techstore.controller;
 
 import com.example.techstore.base.RestApiV1;
 import com.example.techstore.base.VsResponseUtil;
-import com.example.techstore.constant.ErrorMessage;
 import com.example.techstore.constant.UrlConstant;
 import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
 import com.example.techstore.domain.dto.request.NewsRequestDto;
-import com.example.techstore.domain.entity.News;
-import com.example.techstore.domain.mapper.NewsMapper;
-import com.example.techstore.exception.NotFoundException;
-import com.example.techstore.repository.NewsRepository;
 import com.example.techstore.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,14 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestApiV1
 public class NewsController {
     private final NewsService newsService;
-    private final NewsRepository newsRepository;
-    private final NewsMapper newsMapper;
 
     @Tag(name = "news-controller")
     @Operation(summary = "API get news by id")
@@ -45,8 +37,9 @@ public class NewsController {
     @Tag(name = "news-controller")
     @Operation(summary = "API get news by status")
     @GetMapping(UrlConstant.News.GET_BY_STATUS)
-    public ResponseEntity<?> getNewsByStatus(@RequestParam(required = false, defaultValue = "true") Boolean status) {
-        return VsResponseUtil.success(newsService.getByStatus(status));
+    public ResponseEntity<?> getNewsByStatus(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto,
+                                             @RequestParam(required = false, defaultValue = "true") Boolean status) {
+        return VsResponseUtil.success(newsService.getByStatus(paginationFullRequestDto,status));
     }
 
     @Tag(name = "news-controller")
