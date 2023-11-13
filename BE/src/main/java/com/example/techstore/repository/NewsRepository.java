@@ -15,6 +15,6 @@ public interface NewsRepository extends JpaRepository<News,String> {
     Page<News> getAll(Pageable pageable);
 
     @Query(value = "SELECT * FROM news WHERE status = ?1", nativeQuery = true)
-    List<News> getByStatus(Boolean status);
+    Page<News> getByStatus(Boolean status,Pageable pageable);
 
 }

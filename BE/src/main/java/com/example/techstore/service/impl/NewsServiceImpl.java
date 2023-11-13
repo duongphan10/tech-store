@@ -45,12 +45,8 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public PaginationResponseDto<NewsDto> getByStatus(PaginationFullRequestDto paginationFullRequestDto, Boolean status) {
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.NEWS);
-        List<News> newsList = newsRepository.getByStatus(status);
-        Page<News> newsPage = new PageImpl<>(newsList, pageable, newsList.size());
+        Page<News> newsPage = newsRepository.getByStatus(status, pageable);
 
-        if (newsPage.isEmpty()) {
-            throw new NotFoundException(ErrorMessage.News.ERR_NOT_FOUND_STATUS, new String[]{status.toString()});
-        }
         PagingMeta meta = PaginationUtil.buildPagingMeta(paginationFullRequestDto, SortByDataConstant.NEWS, newsPage);
         List<NewsDto> newsDtoList = newsMapper.mapNewsToNewsDto(newsPage.getContent());
         return new PaginationResponseDto<>(meta, newsDtoList);
