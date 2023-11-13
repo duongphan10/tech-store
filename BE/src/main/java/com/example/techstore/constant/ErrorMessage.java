@@ -44,5 +44,8 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND_ID = "exception.category.not.found.id";
 
     }
+    public static class News {
+        public static final String ERR_NOT_FOUND_ID = "exception.news.not.found.id";
+    }
 
 }

@@ -13,4 +13,5 @@ public class MessageConstant {
     public static final String CREATE_NEW_PASSWORD_SUCCESSFULLY = "Create new password successfully";
     public static String DELETE_ADDRESS_SUCCESSFULLY = "You successfully deleted the address";
     public static final String DELETE_CATEGORY_SUCCESSFULLY = "You successfully deleted the category";
+    public static String DELETE_NEWS_SUCCESSFULLY = "You successfully deleted the news";
 }
