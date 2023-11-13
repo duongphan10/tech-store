@@ -27,10 +27,10 @@ public class News extends UserDateAuditing {
     @Column(nullable = false)
     private String avatar;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String summary;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String content;
 
     @Column(nullable = false)

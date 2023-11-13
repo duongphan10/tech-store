@@ -4,6 +4,7 @@ import com.example.techstore.base.RestApiV1;
 import com.example.techstore.base.VsResponseUtil;
 import com.example.techstore.constant.ErrorMessage;
 import com.example.techstore.constant.UrlConstant;
+import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
 import com.example.techstore.domain.dto.request.NewsRequestDto;
 import com.example.techstore.domain.entity.News;
 import com.example.techstore.domain.mapper.NewsMapper;
@@ -13,6 +14,7 @@ import com.example.techstore.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,12 +45,12 @@ public class NewsController {
     @Tag(name = "news-controller")
     @Operation(summary = "API get news by status")
     @GetMapping(UrlConstant.News.GET_BY_STATUS)
-    public ResponseEntity<?> getNewsByStatus(@PathVariable Boolean status) {
+    public ResponseEntity<?> getNewsByStatus(@RequestParam(required = false, defaultValue = "true") Boolean status) {
         List<News> newsList = newsRepository.getByStatus(status);
         if(newsList.size() == 0){
             throw new NotFoundException(ErrorMessage.News.ERR_NOT_FOUND_STATUS,new String[]{status.toString()});
         }
-        return VsResponseUtil.success(newsMapper.mapNewsToNewsDto(newsRepository.getByStatus(status)));
+        return VsResponseUtil.success(newsMapper.mapNewsToNewsDto(newsList));
     }
 
     @Tag(name = "news-controller")
@@ -70,5 +72,12 @@ public class NewsController {
     @DeleteMapping(UrlConstant.News.DELETE)
     public ResponseEntity<?> deleteNews(@PathVariable String id) {
         return VsResponseUtil.success(newsService.deleteById(id));
+    }
+
+    @Tag(name = "news-controller")
+    @Operation(summary = "API get News by Page")
+    @GetMapping(UrlConstant.News.GET_BY_PAGE)
+    public ResponseEntity<?> getAllNewsByPage(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
+        return VsResponseUtil.success(newsService.getAll(paginationFullRequestDto));
     }
 }

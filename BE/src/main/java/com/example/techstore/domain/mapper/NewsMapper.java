@@ -19,8 +19,15 @@ public interface NewsMapper {
     })
     void updateNews(@MappingTarget News news, NewsRequestDto updateDto);
 
-
-    @Mapping(target = "categoryId", source = "category.id")
+    @Mappings({
+            @Mapping(target = "id", source = "id"),
+            @Mapping(target = "title", source = "title"),
+            @Mapping(target = "avatar", source = "avatar"),
+            @Mapping(target = "summary", source = "summary"),
+            @Mapping(target = "content", source = "content"),
+            @Mapping(target = "status", source = "status"),
+            @Mapping(target = "categoryId", source = "category.id")
+    })
     NewsDto mapNewsToNewsDto(News news);
 
     List<NewsDto> mapNewsToNewsDto(List<News> news);

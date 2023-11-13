@@ -1,19 +1,29 @@
 package com.example.techstore.service.impl;
 
+import com.example.techstore.constant.CommonConstant;
 import com.example.techstore.constant.ErrorMessage;
 import com.example.techstore.constant.MessageConstant;
+import com.example.techstore.constant.SortByDataConstant;
+import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
+import com.example.techstore.domain.dto.pagination.PaginationResponseDto;
+import com.example.techstore.domain.dto.pagination.PagingMeta;
 import com.example.techstore.domain.dto.request.NewsRequestDto;
 import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.dto.response.NewsDto;
+import com.example.techstore.domain.dto.response.UserDto;
 import com.example.techstore.domain.entity.Category;
 import com.example.techstore.domain.entity.News;
+import com.example.techstore.domain.entity.User;
 import com.example.techstore.domain.mapper.NewsMapper;
 import com.example.techstore.exception.NotFoundException;
 import com.example.techstore.repository.CategoryRepository;
 import com.example.techstore.repository.NewsRepository;
 import com.example.techstore.service.NewsService;
+import com.example.techstore.util.PaginationUtil;
 import com.example.techstore.util.UploadFileUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
@@ -75,4 +85,18 @@ public class NewsServiceImpl implements NewsService {
         return new CommonResponseDto(true, MessageConstant.DELETE_NEWS_SUCCESSFULLY);
     }
 
+    @Override
+    public PaginationResponseDto<NewsDto> getAll(PaginationFullRequestDto paginationFullRequestDto) {
+
+        Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.NEWS);
+
+        //Create Output
+        Page<News> newsPage = newsRepository.getAll(pageable);
+        PagingMeta meta = PaginationUtil
+                .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.NEWS, newsPage);
+
+        List<NewsDto> newsDto =
+                newsMapper.mapNewsToNewsDto(newsPage.getContent());
+        return new PaginationResponseDto<>(meta, newsDto);
+    }
 }
