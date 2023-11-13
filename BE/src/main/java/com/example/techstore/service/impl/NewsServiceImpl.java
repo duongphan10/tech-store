@@ -32,7 +32,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class NewsServiceImpl implements NewsService {
-
     private final NewsRepository newsRepository;
     private final CategoryRepository categoryRepository;
     private final UploadFileUtil uploadFileUtil;
@@ -46,10 +45,28 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<NewsDto> getAll() {
-        return newsMapper.mapNewsToNewsDto(newsRepository.findAll());
+    public List<NewsDto> getByStatus(Boolean status) {
+        List<News> newsList = newsRepository.getByStatus(status);
+        if(newsList.size() == 0){
+            throw new NotFoundException(ErrorMessage.News.ERR_NOT_FOUND_STATUS,new String[]{status.toString()});
+        }
+        return newsMapper.mapNewsToNewsDto(newsList);
     }
 
+    @Override
+    public PaginationResponseDto<NewsDto> getAll(PaginationFullRequestDto paginationFullRequestDto) {
+
+        Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.NEWS);
+
+        //Create Output
+        Page<News> newsPage = newsRepository.getAll(pageable);
+        PagingMeta meta = PaginationUtil
+                .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.NEWS, newsPage);
+
+        List<NewsDto> newsDto =
+                newsMapper.mapNewsToNewsDto(newsPage.getContent());
+        return new PaginationResponseDto<>(meta, newsDto);
+    }
 
     @Override
     public NewsDto create(NewsRequestDto createDto) {
@@ -77,6 +94,7 @@ public class NewsServiceImpl implements NewsService {
         news.setCategory(category);
         return newsMapper.mapNewsToNewsDto(newsRepository.save(news));
     }
+
     @Override
     public CommonResponseDto deleteById(String id) {
         News news = newsRepository.findById(id)
@@ -85,18 +103,7 @@ public class NewsServiceImpl implements NewsService {
         return new CommonResponseDto(true, MessageConstant.DELETE_NEWS_SUCCESSFULLY);
     }
 
-    @Override
-    public PaginationResponseDto<NewsDto> getAll(PaginationFullRequestDto paginationFullRequestDto) {
 
-        Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.NEWS);
 
-        //Create Output
-        Page<News> newsPage = newsRepository.getAll(pageable);
-        PagingMeta meta = PaginationUtil
-                .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.NEWS, newsPage);
 
-        List<NewsDto> newsDto =
-                newsMapper.mapNewsToNewsDto(newsPage.getContent());
-        return new PaginationResponseDto<>(meta, newsDto);
-    }
 }

@@ -13,11 +13,12 @@ import java.util.List;
 
 public interface NewsService {
     NewsDto getById(String id);
-    List<NewsDto> getAll();
+    PaginationResponseDto<NewsDto> getAll(PaginationFullRequestDto paginationFullRequestDto);
+    List<NewsDto> getByStatus(Boolean status);
     //List<NewsDto> getByStatus(Boolean status);
     NewsDto create(NewsRequestDto createDto);
     NewsDto update(String id,NewsRequestDto updateDto);
     CommonResponseDto deleteById(String id);
 
-    PaginationResponseDto<NewsDto> getAll(PaginationFullRequestDto paginationFullRequestDto);
+
 }

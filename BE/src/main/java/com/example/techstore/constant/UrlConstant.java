@@ -54,7 +54,6 @@ public class UrlConstant {
         private static final String PRE_FIX = "/news";
         public static final String GET_BY_ID = PRE_FIX + "/{id}";
         public static final String GET_BY_STATUS = PRE_FIX + "/status";
-        public static final String GET_BY_PAGE = PRE_FIX + "/page";
         public static final String GET_ALL = PRE_FIX + "/all";
         public static final String CREATE = PRE_FIX + "/create";
         public static final String UPDATE = PRE_FIX + "/{id}";

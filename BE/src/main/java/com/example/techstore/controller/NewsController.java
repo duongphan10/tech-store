@@ -29,13 +29,6 @@ public class NewsController {
     private final NewsMapper newsMapper;
 
     @Tag(name = "news-controller")
-    @Operation(summary = "API get all news")
-    @GetMapping(UrlConstant.News.GET_ALL)
-    public ResponseEntity<?> getAllNews() {
-        return VsResponseUtil.success(newsService.getAll());
-    }
-
-    @Tag(name = "news-controller")
     @Operation(summary = "API get news by id")
     @GetMapping(UrlConstant.News.GET_BY_ID)
     public ResponseEntity<?> getNewsById(@PathVariable String id) {
@@ -43,14 +36,17 @@ public class NewsController {
     }
 
     @Tag(name = "news-controller")
+    @Operation(summary = "API get all News by Page")
+    @GetMapping(UrlConstant.News.GET_ALL)
+    public ResponseEntity<?> getAllNews(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
+        return VsResponseUtil.success(newsService.getAll(paginationFullRequestDto));
+    }
+
+    @Tag(name = "news-controller")
     @Operation(summary = "API get news by status")
     @GetMapping(UrlConstant.News.GET_BY_STATUS)
     public ResponseEntity<?> getNewsByStatus(@RequestParam(required = false, defaultValue = "true") Boolean status) {
-        List<News> newsList = newsRepository.getByStatus(status);
-        if(newsList.size() == 0){
-            throw new NotFoundException(ErrorMessage.News.ERR_NOT_FOUND_STATUS,new String[]{status.toString()});
-        }
-        return VsResponseUtil.success(newsMapper.mapNewsToNewsDto(newsList));
+        return VsResponseUtil.success(newsService.getByStatus(status));
     }
 
     @Tag(name = "news-controller")
@@ -72,12 +68,5 @@ public class NewsController {
     @DeleteMapping(UrlConstant.News.DELETE)
     public ResponseEntity<?> deleteNews(@PathVariable String id) {
         return VsResponseUtil.success(newsService.deleteById(id));
-    }
-
-    @Tag(name = "news-controller")
-    @Operation(summary = "API get News by Page")
-    @GetMapping(UrlConstant.News.GET_BY_PAGE)
-    public ResponseEntity<?> getAllNewsByPage(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
-        return VsResponseUtil.success(newsService.getAll(paginationFullRequestDto));
     }
 }
