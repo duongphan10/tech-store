@@ -45,12 +45,12 @@ public class ProductServiceImpl implements ProductService {
     public PaginationResponseDto<ProductDto> getAll(PaginationFullRequestDto paginationFullRequestDto) {
         Pageable pageable = PaginationUtil
                 .buildPageable(paginationFullRequestDto, SortByDataConstant.PRODUCT);
-        Page<Product> productPage = productRepository.getAll(pageable);
+        Page<Product> productPage = productRepository.getAll(paginationFullRequestDto.getKeyword(), pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.PRODUCT, productPage);
 
-        List<ProductDto> productDtos =
-                productMapper.mapProductsToProductDtos(productPage.getContent());
+        List<ProductDto> productDtos = productMapper.mapProductsToProductDtos(productPage.getContent());
+
         return new PaginationResponseDto<>(meta, productDtos);
     }
 
@@ -65,8 +65,8 @@ public class ProductServiceImpl implements ProductService {
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.PRODUCT, productPage);
 
-        List<ProductDto> productDtos =
-                productMapper.mapProductsToProductDtos(productPage.getContent());
+        List<ProductDto> productDtos = productMapper.mapProductsToProductDtos(productPage.getContent());
+
         return new PaginationResponseDto<>(meta, productDtos);
     }
 
@@ -86,7 +86,8 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Product.ERR_NOT_FOUND_ID, new String[]{id}));
         Category category = categoryRepository.findById(productRequestDto.getCategoryId())
-                .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID, new String[]{productRequestDto.getCategoryId()}));        productMapper.update(product, productRequestDto);
+                .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID, new String[]{productRequestDto.getCategoryId()}));
+        productMapper.update(product, productRequestDto);
         uploadFileUtil.destroyImageWithUrl(product.getAvatar());
         product.setAvatar(uploadFileUtil.uploadImage(productRequestDto.getAvatar()));
         product.setCategory(category);

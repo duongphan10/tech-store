@@ -36,8 +36,8 @@ public class ProductController {
 
     @Tag(name = "product-controller")
     @Operation(summary = "API get all product by category")
-    @GetMapping(UrlConstant.Product.GET_ALL_BY_CATEGORY_ID)
-    public ResponseEntity<?> getAllProductByCategory(@PathVariable String categoryId,
+    @GetMapping(UrlConstant.Product.GET_ALL_BY_CATEGORY)
+    public ResponseEntity<?> getAllProductByCategory(@Valid @RequestParam(name = "categoryId", required = true) String categoryId,
                                                      @Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
         return VsResponseUtil.success(productService.getAllByCategory(categoryId, paginationFullRequestDto));
     }
