@@ -39,14 +39,14 @@ public class UrlConstant {
         }
     }
 
-    public  static class Category{
+    public static class Category {
         private static final String PRE_FIX = "/category";
         public static final String GET_BY_ID = PRE_FIX + "/{id}";
         public static final String GET_ALL = PRE_FIX + "/all";
         public static final String CREATE = PRE_FIX + "/create";
         public static final String UPDATE = PRE_FIX + "/{id}";
         public static final String DELETE = PRE_FIX + "/{id}";
-        private Category(){
+        private Category() {
         }
     }
 
@@ -59,6 +59,25 @@ public class UrlConstant {
         public static final String UPDATE = PRE_FIX + "/{id}";
         public static final String DELETE = PRE_FIX + "/{id}";
         private News(){
+        }
+    }
+
+    public static class Product {
+        private static final String PRE_FIX = "/product";
+        public static final String GET_BY_ID = PRE_FIX + "/{id}";
+        public static final String GET_ALL = PRE_FIX + "/all";
+        public static final String SEARCH = PRE_FIX + "/search";
+        public static final String CREATE = PRE_FIX + "/create";
+        public static final String UPDATE = PRE_FIX + "/{id}";
+        public static final String DELETE = PRE_FIX + "/{id}";
+
+        // OPTION
+        public static final String GET_OPTION_BY_ID = PRE_FIX + "/option/{id}";
+        public static final String GET_ALL_OPTION= PRE_FIX + "/option/all/{productId}";
+        public static final String CREATE_OPTION = PRE_FIX + "/option/create";
+        public static final String UPDATE_OPTION = PRE_FIX + "/option/{id}";
+        public static final String DELETE_OPTION = PRE_FIX + "/option/{id}";
+        private Product() {
         }
     }
 

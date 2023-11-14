@@ -6,36 +6,37 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "product_options")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Category extends UserDateAuditing {
+public class ProductOption extends UserDateAuditing {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
     private String id;
-
     @Column(nullable = false)
-    private String name;
-
+    private Integer ram;
     @Column(nullable = false)
-    private String avatar;
+    private Integer storageCapacity;
+    @Column(nullable = false)
+    private String color;
+    @Column(nullable = false)
+    private String image;
+    @Column(nullable = false)
+    private Long price;
+    @Column(nullable = false)
+    private Integer quantity;
+    @Column(nullable = false)
+    private Boolean status;
 
-    @Column(nullable = true)
-    private String description;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<News> news;
-
+    @ManyToOne
+    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "FK_OPTION_PRODUCT"))
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<Product> products;
-
+    private Product product;
 }
