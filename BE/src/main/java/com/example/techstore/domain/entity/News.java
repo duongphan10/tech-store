@@ -1,21 +1,19 @@
 package com.example.techstore.domain.entity;
 
 import com.example.techstore.domain.entity.common.UserDateAuditing;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "news")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Category extends UserDateAuditing {
+public class News extends UserDateAuditing {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -23,19 +21,22 @@ public class Category extends UserDateAuditing {
     private String id;
 
     @Column(nullable = false)
-    private String name;
+    private String title;
 
     @Column(nullable = false)
     private String avatar;
 
-    @Column(nullable = true)
-    private String description;
+    @Column(nullable = false)
+    private String summary;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<News> news;
+    @Column(nullable = false)
+    private String content;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<Product> products;
+    @Column(nullable = false)
+    private Boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "FK_CATEGORY_NEWS"))
+    private Category category;
 
 }
