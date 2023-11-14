@@ -2,6 +2,7 @@ package com.example.techstore.domain.mapper;
 
 import com.example.techstore.domain.dto.request.ProductRequestDto;
 import com.example.techstore.domain.dto.response.ProductDto;
+import com.example.techstore.domain.dto.response.ProductSimpleDto;
 import com.example.techstore.domain.entity.Product;
 import org.mapstruct.*;
 
@@ -21,6 +22,14 @@ public interface ProductMapper {
     ProductDto mapProductToProductDto(Product product);
 
     List<ProductDto> mapProductsToProductDtos(List<Product> products);
+
+    @Mappings({
+            @Mapping(target = "categoryId", source = "category.id"),
+            @Mapping(target = "productOptionSimpleDtos", source = "productOptions"),
+    })
+    ProductSimpleDto mapProductToProductSimpleDto(Product product);
+
+    List<ProductSimpleDto> mapProductsToProductSimpleDtos(List<Product> products);
 
     @Mappings({
             @Mapping(target = "avatar", ignore = true),

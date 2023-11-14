@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -53,4 +55,6 @@ public class ProductDto extends UserDateAuditingDto {
 
     private String categoryId;
     private String categoryName;
+
+    private List<ProductOptionDto> productOptionDtos;
 }

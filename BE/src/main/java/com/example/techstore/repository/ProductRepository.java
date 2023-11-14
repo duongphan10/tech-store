@@ -9,10 +9,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
-    @Query(value = "SELECT * FROM products WHERE LOWER(products.name) LIKE LOWER(CONCAT('%', ?1, '%'))", nativeQuery = true)
-    Page<Product> getAll(String keyword, Pageable pageable);
+    @Query(value = "SELECT * FROM products", nativeQuery = true)
+    Page<Product> getAll(Pageable pageable);
 
     @Query(value = "SELECT * FROM products WHERE category_id = ?1", nativeQuery = true)
-    Page<Product> getAllByCategoryId(String categoryId, Pageable pageable);
+    Page<Product> getAll(String categoryId, Pageable pageable);
+
+    @Query(value = "SELECT * FROM products WHERE LOWER(products.name) LIKE LOWER(CONCAT('%', ?1, '%'))", nativeQuery = true)
+    Page<Product> search(String keyword, Pageable pageable);
 
 }

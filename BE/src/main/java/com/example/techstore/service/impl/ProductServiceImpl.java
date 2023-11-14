@@ -1,5 +1,6 @@
 package com.example.techstore.service.impl;
 
+import com.example.techstore.constant.CommonConstant;
 import com.example.techstore.constant.ErrorMessage;
 import com.example.techstore.constant.MessageConstant;
 import com.example.techstore.constant.SortByDataConstant;
@@ -9,6 +10,7 @@ import com.example.techstore.domain.dto.pagination.PagingMeta;
 import com.example.techstore.domain.dto.request.ProductRequestDto;
 import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.dto.response.ProductDto;
+import com.example.techstore.domain.dto.response.ProductSimpleDto;
 import com.example.techstore.domain.entity.Category;
 import com.example.techstore.domain.entity.Product;
 import com.example.techstore.domain.mapper.ProductMapper;
@@ -42,32 +44,47 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PaginationResponseDto<ProductDto> getAll(PaginationFullRequestDto paginationFullRequestDto) {
+    public PaginationResponseDto<ProductSimpleDto> getAll(String categoryId, PaginationFullRequestDto paginationFullRequestDto) {
+        if (!categoryId.isEmpty()) {
+            categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID, new String[]{categoryId}));
+        }
+        int pageSize = paginationFullRequestDto.getPageSize() != CommonConstant.PAGE_SIZE_DEFAULT
+                ? paginationFullRequestDto.getPageSize() : CommonConstant.NUM_OF_PRODUCT_PER_PAGE;
+        paginationFullRequestDto.setPageSize(pageSize);
         Pageable pageable = PaginationUtil
                 .buildPageable(paginationFullRequestDto, SortByDataConstant.PRODUCT);
-        Page<Product> productPage = productRepository.getAll(paginationFullRequestDto.getKeyword(), pageable);
+        Page<Product> productPage;
+        if (categoryId.isEmpty()) {
+            productPage = productRepository.getAll(pageable);
+        }
+        else {
+            productPage = productRepository.getAll(categoryId, pageable);
+        }
+
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.PRODUCT, productPage);
 
-        List<ProductDto> productDtos = productMapper.mapProductsToProductDtos(productPage.getContent());
+        List<ProductSimpleDto> productSimpleDtos = productMapper.mapProductsToProductSimpleDtos(productPage.getContent());
 
-        return new PaginationResponseDto<>(meta, productDtos);
+        return new PaginationResponseDto<>(meta, productSimpleDtos);
     }
 
     @Override
-    public PaginationResponseDto<ProductDto> getAllByCategory(String categoryId, PaginationFullRequestDto paginationFullRequestDto) {
-        categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID, new String[]{categoryId}));
+    public PaginationResponseDto<ProductSimpleDto> search(PaginationFullRequestDto paginationFullRequestDto) {
+        int pageSize = paginationFullRequestDto.getPageSize() != CommonConstant.PAGE_SIZE_DEFAULT
+                ? paginationFullRequestDto.getPageSize() : CommonConstant.NUM_OF_PRODUCT_PER_PAGE;
+        paginationFullRequestDto.setPageSize(pageSize);
 
         Pageable pageable = PaginationUtil
                 .buildPageable(paginationFullRequestDto, SortByDataConstant.PRODUCT);
-        Page<Product> productPage = productRepository.getAllByCategoryId(categoryId, pageable);
+        Page<Product> productPage = productRepository.search(paginationFullRequestDto.getKeyword(), pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.PRODUCT, productPage);
 
-        List<ProductDto> productDtos = productMapper.mapProductsToProductDtos(productPage.getContent());
+        List<ProductSimpleDto> productSimpleDtos = productMapper.mapProductsToProductSimpleDtos(productPage.getContent());
 
-        return new PaginationResponseDto<>(meta, productDtos);
+        return new PaginationResponseDto<>(meta, productSimpleDtos);
     }
 
     @Override

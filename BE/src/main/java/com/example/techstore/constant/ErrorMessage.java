@@ -50,4 +50,9 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND_ID = "exception.product.not.found.id";
     }
 
+    public static class ProductOption {
+        public static final String ERR_NOT_FOUND_ID = "exception.product.option.not.found.id";
+    }
+
+
 }
