@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "product_options")
@@ -39,4 +40,8 @@ public class ProductOption extends UserDateAuditing {
     @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "FK_OPTION_PRODUCT"))
     @JsonIgnore
     private Product product;
+
+    @OneToMany(mappedBy = "productOption", cascade = CascadeType.ALL)
+    private List<Cart> carts;
+
 }

@@ -25,14 +25,16 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper categoryMapper;
     private final UploadFileUtil uploadFileUtil;
     private final UserService userService;
+
     @Override
     public CategoryDto getById(String id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID, new String[]{id}));
         return categoryMapper.mapCategoryToCategoryDto(category);
     }
+
     @Override
-    public List<CategoryDto> getAll(){
+    public List<CategoryDto> getAll() {
         return categoryMapper.mapCategoryToCategoryDto(categoryRepository.findAll());
     }
 
@@ -44,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto update(String id,CategoryRequestDto updateDto) {
+    public CategoryDto update(String id, CategoryRequestDto updateDto) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID, new String[]{id}));
 

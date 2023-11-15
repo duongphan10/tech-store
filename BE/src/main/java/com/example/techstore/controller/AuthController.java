@@ -5,7 +5,6 @@ import com.example.techstore.base.VsResponseUtil;
 import com.example.techstore.constant.UrlConstant;
 import com.example.techstore.domain.dto.request.LoginRequestDto;
 import com.example.techstore.service.AuthService;
-import com.example.techstore.validator.annotation.ValidFileImage;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

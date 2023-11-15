@@ -10,9 +10,14 @@ import com.example.techstore.security.UserPrincipal;
 
 public interface UserService {
     User getById(String userId);
+
     UserDto getUserDtoById(String userId);
+
     PaginationResponseDto<UserDto> getAll(PaginationFullRequestDto paginationFullRequestDto);
+
     UserDto getCurrentUser(UserPrincipal user);
+
     UserDto create(UserCreateDto userCreateDto);
+
     UserDto update(String userId, UserUpdateDto userUpdateDto);
 }

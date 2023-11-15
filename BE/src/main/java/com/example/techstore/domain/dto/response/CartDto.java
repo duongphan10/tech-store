@@ -10,16 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProductOptionDto extends UserDateAuditingDto {
-    private String productId;
-    private String productName;
+public class CartDto extends UserDateAuditingDto {
     private String id;
-    private Integer ram;
-    private Integer storageCapacity;
-    private String color;
-    private String image;
-    private Long price;
+    private ProductOptionDto productOptionDto;
     private Integer quantity;
-    private Boolean status;
-
 }

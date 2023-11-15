@@ -15,6 +15,7 @@ public class ErrorMessage {
     public static final String INVALID_FORMAT_SOME_THING_FIELD = "invalid.general.format";
     public static final String INVALID_SOME_THING_FIELD_IS_REQUIRED = "invalid.general.required";
     public static final String NOT_BLANK_FIELD = "invalid.general.not-blank";
+    public static final String INVALID_NUMBER_POSITIVE = "invalid.number.positive";
     public static final String INVALID_FORMAT_PASSWORD = "invalid.password-format";
     public static final String INVALID_DATE = "invalid.date-format";
     public static final String INVALID_DATE_FEATURE = "invalid.date-future";
@@ -45,6 +46,7 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND_ID = "exception.category.not.found.id";
 
     }
+
     public static class News {
         public static final String ERR_NOT_FOUND_ID = "exception.news.not.found.id";
     }
@@ -55,6 +57,12 @@ public class ErrorMessage {
 
     public static class ProductOption {
         public static final String ERR_NOT_FOUND_ID = "exception.product.option.not.found.id";
+        public static final String ERR_OUT_OF_STOCK = "exception.product.option.out.of.stock";
+    }
+
+    public static class Cart {
+        public static final String ERR_NOT_FOUND_ID = "exception.cart.not.found.id";
+        public static final String ERR_QUANTITY_EXCEEDED = "exception.quantity.exceeded";
     }
 
 

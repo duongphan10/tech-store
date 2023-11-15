@@ -57,8 +57,7 @@ public class ProductServiceImpl implements ProductService {
         Page<Product> productPage;
         if (categoryId.isEmpty()) {
             productPage = productRepository.getAll(pageable);
-        }
-        else {
+        } else {
             productPage = productRepository.getAll(categoryId, pageable);
         }
 

@@ -39,7 +39,7 @@ public class NewsController {
     @GetMapping(UrlConstant.News.GET_BY_STATUS)
     public ResponseEntity<?> getNewsByStatus(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto,
                                              @RequestParam(required = false, defaultValue = "true") Boolean status) {
-        return VsResponseUtil.success(newsService.getByStatus(paginationFullRequestDto,status));
+        return VsResponseUtil.success(newsService.getByStatus(paginationFullRequestDto, status));
     }
 
     @Tag(name = "news-controller")
@@ -52,7 +52,7 @@ public class NewsController {
     @Tag(name = "news-controller")
     @Operation(summary = "API update news")
     @PatchMapping(UrlConstant.News.UPDATE)
-    public ResponseEntity<?> updateNews(@PathVariable String id,@Valid @ModelAttribute NewsRequestDto updateDto) {
+    public ResponseEntity<?> updateNews(@PathVariable String id, @Valid @ModelAttribute NewsRequestDto updateDto) {
         return VsResponseUtil.success(newsService.update(id, updateDto));
     }
 

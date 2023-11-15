@@ -35,6 +35,7 @@ public class UrlConstant {
         public static final String UPDATE_BY_ID = PRE_FIX + "/{id}";
         public static final String CHANGE_DEFAULT_BY_ID = PRE_FIX + "/default/{id}";
         public static final String DELETE_BY_ID = PRE_FIX + "/{id}";
+
         public Address() {
         }
     }
@@ -46,11 +47,12 @@ public class UrlConstant {
         public static final String CREATE = PRE_FIX + "/create";
         public static final String UPDATE = PRE_FIX + "/{id}";
         public static final String DELETE = PRE_FIX + "/{id}";
+
         private Category() {
         }
     }
 
-    public static class News{
+    public static class News {
         private static final String PRE_FIX = "/news";
         public static final String GET_BY_ID = PRE_FIX + "/{id}";
         public static final String GET_BY_STATUS = PRE_FIX + "/status";
@@ -58,7 +60,8 @@ public class UrlConstant {
         public static final String CREATE = PRE_FIX + "/create";
         public static final String UPDATE = PRE_FIX + "/{id}";
         public static final String DELETE = PRE_FIX + "/{id}";
-        private News(){
+
+        private News() {
         }
     }
 
@@ -73,11 +76,24 @@ public class UrlConstant {
 
         // OPTION
         public static final String GET_OPTION_BY_ID = PRE_FIX + "/option/{id}";
-        public static final String GET_ALL_OPTION= PRE_FIX + "/option/all/{productId}";
+        public static final String GET_ALL_OPTION = PRE_FIX + "/option/all/{productId}";
         public static final String CREATE_OPTION = PRE_FIX + "/option/create";
         public static final String UPDATE_OPTION = PRE_FIX + "/option/{id}";
         public static final String DELETE_OPTION = PRE_FIX + "/option/{id}";
+
         private Product() {
+        }
+    }
+
+    public static class Cart {
+        private static final String PRE_FIX = "/cart";
+        public static final String GET_ALL = PRE_FIX + "/all";
+        public static final String GET_NUMBER_OF_ITEM = PRE_FIX + "/items";
+        public static final String CREATE = PRE_FIX + "/create";
+        public static final String UPDATE = PRE_FIX + "/{id}";
+        public static final String DELETE = PRE_FIX + "/{id}";
+
+        private Cart() {
         }
     }
 
