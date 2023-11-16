@@ -1,6 +1,7 @@
 package com.example.techstore.domain.entity;
 
 import com.example.techstore.domain.entity.common.UserDateAuditing;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -97,4 +98,8 @@ public class Product extends UserDateAuditing {
 
     @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL})
     private List<ProductOption> productOptions;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product",cascade = {CascadeType.ALL})
+    private List<Slide> slides;
 }

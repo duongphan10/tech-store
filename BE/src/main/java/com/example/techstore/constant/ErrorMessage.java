@@ -15,6 +15,7 @@ public class ErrorMessage {
     public static final String INVALID_FORMAT_SOME_THING_FIELD = "invalid.general.format";
     public static final String INVALID_SOME_THING_FIELD_IS_REQUIRED = "invalid.general.required";
     public static final String NOT_BLANK_FIELD = "invalid.general.not-blank";
+    public static final String INVALID_NUMBER_POSITIVE = "invalid.number.positive";
     public static final String INVALID_FORMAT_PASSWORD = "invalid.password-format";
     public static final String INVALID_DATE = "invalid.date-format";
     public static final String INVALID_DATE_FEATURE = "invalid.date-future";
@@ -56,6 +57,9 @@ public class ErrorMessage {
     public static class ProductOption {
         public static final String ERR_NOT_FOUND_ID = "exception.product.option.not.found.id";
     }
-
+    public static class Slide {
+        public static final String ERR_NOT_FOUND_ID = "exception.slide.not.found.id";
+        public static final String ERR_POSITION_ALREADY_EXIST = "exception.slide.position.already.exist";
+    }
 
 }
