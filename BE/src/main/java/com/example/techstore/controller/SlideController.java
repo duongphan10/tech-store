@@ -19,24 +19,27 @@ import javax.validation.Valid;
 @RestApiV1
 public class SlideController {
     private final SlideService slideService;
+
     @Tag(name = "slide-controller")
     @Operation(summary = "API get slide by id")
     @GetMapping(UrlConstant.Slide.GET_BY_ID)
     public ResponseEntity<?> getSlideById(@PathVariable String id) {
         return VsResponseUtil.success(slideService.getById(id));
     }
+
     @Tag(name = "slide-controller")
     @Operation(summary = "API get all slide by Page")
     @GetMapping(UrlConstant.Slide.GET_ALL)
     public ResponseEntity<?> getAllSlide(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
         return VsResponseUtil.success(slideService.getAll(paginationFullRequestDto));
     }
+
     @Tag(name = "slide-controller")
     @Operation(summary = "API get slide by status")
     @GetMapping(UrlConstant.Slide.GET_BY_STATUS)
     public ResponseEntity<?> getSlideByStatus(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto,
-                                             @RequestParam(required = false, defaultValue = "true") Boolean status) {
-        return VsResponseUtil.success(slideService.getByStatus(paginationFullRequestDto,status));
+                                              @RequestParam(required = false, defaultValue = "true") Boolean status) {
+        return VsResponseUtil.success(slideService.getByStatus(paginationFullRequestDto, status));
     }
 
     @Tag(name = "slide-controller")
@@ -49,7 +52,7 @@ public class SlideController {
     @Tag(name = "slide-controller")
     @Operation(summary = "API update slide")
     @PatchMapping(UrlConstant.Slide.UPDATE)
-    public ResponseEntity<?> updateSlide(@PathVariable String id,@Valid @ModelAttribute SlideRequestDto updateDto) {
+    public ResponseEntity<?> updateSlide(@PathVariable String id, @Valid @ModelAttribute SlideRequestDto updateDto) {
         return VsResponseUtil.success(slideService.update(id, updateDto));
     }
 

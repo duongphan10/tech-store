@@ -20,7 +20,6 @@ import com.example.techstore.util.PaginationUtil;
 import com.example.techstore.util.UploadFileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,10 +81,10 @@ public class NewsServiceImpl implements NewsService {
         Category category = categoryRepository.findById(updateDto.getCategoryId())
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Category.ERR_NOT_FOUND_ID,
                         new String[]{updateDto.getCategoryId()}));
-        newsMapper.updateNews(news,updateDto);
+        newsMapper.updateNews(news, updateDto);
 
         MultipartFile multipartFile = updateDto.getAvatar();
-        if (multipartFile != null && !multipartFile.isEmpty()){
+        if (multipartFile != null && !multipartFile.isEmpty()) {
             uploadFileUtil.destroyImageWithUrl(news.getAvatar());
             news.setAvatar(uploadFileUtil.uploadImage(updateDto.getAvatar()));
             news.setCategory(category);

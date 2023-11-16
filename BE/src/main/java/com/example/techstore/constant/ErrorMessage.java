@@ -46,6 +46,7 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND_ID = "exception.category.not.found.id";
 
     }
+
     public static class News {
         public static final String ERR_NOT_FOUND_ID = "exception.news.not.found.id";
     }
@@ -57,6 +58,7 @@ public class ErrorMessage {
     public static class ProductOption {
         public static final String ERR_NOT_FOUND_ID = "exception.product.option.not.found.id";
     }
+
     public static class Slide {
         public static final String ERR_NOT_FOUND_ID = "exception.slide.not.found.id";
         public static final String ERR_POSITION_ALREADY_EXIST = "exception.slide.position.already.exist";

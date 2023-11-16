@@ -3,14 +3,12 @@ package com.example.techstore.controller;
 import com.example.techstore.base.RestApiV1;
 import com.example.techstore.base.VsResponseUtil;
 import com.example.techstore.constant.UrlConstant;
-import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
 import com.example.techstore.domain.dto.request.ProductOptionCreateDto;
 import com.example.techstore.domain.dto.request.ProductOptionUpdateDto;
 import com.example.techstore.service.ProductOptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

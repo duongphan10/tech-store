@@ -16,5 +16,6 @@ public class SlideDto extends UserDateAuditingDto {
     private Integer position;
     private String description;
     private Boolean status;
+    private String productName;
     private String productId;
 }

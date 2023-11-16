@@ -9,9 +9,14 @@ import com.example.techstore.domain.dto.response.ProductSimpleDto;
 
 public interface ProductService {
     ProductDto getById(String id);
+
     PaginationResponseDto<ProductSimpleDto> getAll(String categoryId, PaginationFullRequestDto paginationFullRequestDto);
+
     PaginationResponseDto<ProductSimpleDto> search(PaginationFullRequestDto paginationFullRequestDto);
+
     ProductDto create(ProductRequestDto productRequestDto);
+
     ProductDto updateById(String id, ProductRequestDto productRequestDto);
+
     CommonResponseDto deleteById(String id);
 }

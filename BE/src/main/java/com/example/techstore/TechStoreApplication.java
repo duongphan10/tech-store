@@ -25,7 +25,7 @@ public class TechStoreApplication {
         }
         String port = env.getProperty("server.port");
         log.info(" Url swagger-ui: http://localhost:" + port + "/swagger-ui.html");
-        log.info(" ----- START SUCCESS " + appName+ " Application -----");
+        log.info(" ----- START SUCCESS " + appName + " Application -----");
     }
 
     @Bean

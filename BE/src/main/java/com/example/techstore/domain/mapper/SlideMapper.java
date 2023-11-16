@@ -1,10 +1,7 @@
 package com.example.techstore.domain.mapper;
 
-import com.example.techstore.domain.dto.request.NewsRequestDto;
 import com.example.techstore.domain.dto.request.SlideRequestDto;
-import com.example.techstore.domain.dto.response.NewsDto;
 import com.example.techstore.domain.dto.response.SlideDto;
-import com.example.techstore.domain.entity.News;
 import com.example.techstore.domain.entity.Slide;
 import org.mapstruct.*;
 
@@ -23,7 +20,8 @@ public interface SlideMapper {
     void updateSlide(@MappingTarget Slide slide, SlideRequestDto updateDto);
 
     @Mappings({
-            @Mapping(target = "productId", source = "product.id")
+            @Mapping(target = "productId", source = "product.id"),
+            @Mapping(target = "productName", source = "product.name")
     })
     SlideDto mapSlideToSlideDto(Slide slide);
 

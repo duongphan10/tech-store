@@ -12,6 +12,7 @@ import com.example.techstore.domain.dto.response.SlideDto;
 import com.example.techstore.domain.entity.Product;
 import com.example.techstore.domain.entity.Slide;
 import com.example.techstore.domain.mapper.SlideMapper;
+import com.example.techstore.exception.AlreadyExistException;
 import com.example.techstore.exception.NotFoundException;
 import com.example.techstore.repository.ProductRepository;
 import com.example.techstore.repository.SlideRepository;
@@ -68,9 +69,8 @@ public class SlideServiceImpl implements SlideService {
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Product.ERR_NOT_FOUND_ID,
                         new String[]{createDto.getProductId()}));
 
-        Slide check_position = slideRepository.findByPosition(createDto.getPosition());
-        if (check_position != null){
-            throw new NotFoundException(ErrorMessage.Slide.ERR_POSITION_ALREADY_EXIST);
+        if (slideRepository.findByPosition(createDto.getPosition()) != null) {
+            throw new AlreadyExistException(ErrorMessage.Slide.ERR_POSITION_ALREADY_EXIST, new String[]{createDto.getPosition().toString()});
         }
         Slide slide = slideMapper.mapSlideRequestDtoToSlide(createDto);
         slide.setAvatar(uploadFileUtil.uploadImage(createDto.getAvatar()));
@@ -85,14 +85,14 @@ public class SlideServiceImpl implements SlideService {
         Product product = productRepository.findById(updateDto.getProductId())
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Product.ERR_NOT_FOUND_ID,
                         new String[]{updateDto.getProductId()}));
-        slideMapper.updateSlide(slide,updateDto);
+        slideMapper.updateSlide(slide, updateDto);
 
         MultipartFile multipartFile = updateDto.getAvatar();
         if (multipartFile != null && !multipartFile.isEmpty()) {
             uploadFileUtil.destroyImageWithUrl(slide.getAvatar());
             slide.setAvatar(uploadFileUtil.uploadImage(updateDto.getAvatar()));
-            slide.setProduct(product);
         }
+        slide.setProduct(product);
         return slideMapper.mapSlideToSlideDto(slideRepository.save(slide));
     }
 

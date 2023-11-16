@@ -8,9 +8,14 @@ import com.example.techstore.domain.dto.response.SlideDto;
 
 public interface SlideService {
     SlideDto getById(String id);
+
     PaginationResponseDto<SlideDto> getAll(PaginationFullRequestDto paginationFullRequestDto);
-    PaginationResponseDto<SlideDto> getByStatus(PaginationFullRequestDto paginationFullRequestDto,Boolean status);
+
+    PaginationResponseDto<SlideDto> getByStatus(PaginationFullRequestDto paginationFullRequestDto, Boolean status);
+
     SlideDto create(SlideRequestDto createDto);
-    SlideDto update(String id,SlideRequestDto updateDto);
+
+    SlideDto update(String id, SlideRequestDto updateDto);
+
     CommonResponseDto deleteById(String id);
 }

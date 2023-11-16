@@ -100,6 +100,6 @@ public class Product extends UserDateAuditing {
     private List<ProductOption> productOptions;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product",cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL})
     private List<Slide> slides;
 }
