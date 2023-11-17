@@ -10,13 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NewsDto extends UserDateAuditingDto {
+public class SlideDto extends UserDateAuditingDto {
     private String id;
-    private String title;
     private String avatar;
-    private String summary;
-    private String content;
+    private Integer position;
+    private String description;
     private Boolean status;
-    private String categoryId;
-    private String categoryName;
+    private String productName;
+    private String productId;
 }

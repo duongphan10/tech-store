@@ -65,5 +65,9 @@ public class ErrorMessage {
         public static final String ERR_QUANTITY_EXCEEDED = "exception.quantity.exceeded";
     }
 
+    public static class Slide {
+        public static final String ERR_NOT_FOUND_ID = "exception.slide.not.found.id";
+        public static final String ERR_POSITION_ALREADY_EXIST = "exception.slide.position.already.exist";
+    }
 
 }

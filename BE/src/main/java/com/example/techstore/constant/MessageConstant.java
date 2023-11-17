@@ -17,5 +17,5 @@ public class MessageConstant {
     public static final String DELETE_PRODUCT_SUCCESSFULLY = "You successfully deleted the product";
     public static final String DELETE_PRODUCT_OPTION_SUCCESSFULLY = "You successfully deleted the product option";
     public static final String DELETE_CART_ITEM_SUCCESSFULLY = "You successfully deleted the item of cart";
-
+    public static final String DELETE_SLIDE_SUCCESSFULLY = "You successfully deleted the slide";
 }
