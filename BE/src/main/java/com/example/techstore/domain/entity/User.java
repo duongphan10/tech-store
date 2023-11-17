@@ -57,4 +57,7 @@ public class User extends DateAuditing {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Address> addresses;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Cart> carts;
 }

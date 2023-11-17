@@ -57,6 +57,12 @@ public class ErrorMessage {
 
     public static class ProductOption {
         public static final String ERR_NOT_FOUND_ID = "exception.product.option.not.found.id";
+        public static final String ERR_OUT_OF_STOCK = "exception.product.option.out.of.stock";
+    }
+
+    public static class Cart {
+        public static final String ERR_NOT_FOUND_ID = "exception.cart.not.found.id";
+        public static final String ERR_QUANTITY_EXCEEDED = "exception.quantity.exceeded";
     }
 
     public static class Slide {

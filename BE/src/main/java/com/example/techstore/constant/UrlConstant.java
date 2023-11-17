@@ -85,6 +85,17 @@ public class UrlConstant {
         }
     }
 
+    public static class Cart {
+        private static final String PRE_FIX = "/cart";
+        public static final String GET_ALL = PRE_FIX + "/all";
+        public static final String GET_NUMBER_OF_ITEM = PRE_FIX + "/items";
+        public static final String CREATE = PRE_FIX + "/create";
+        public static final String UPDATE = PRE_FIX + "/{id}";
+        public static final String DELETE = PRE_FIX + "/{id}";
+        private Cart() {
+        }
+    }
+
     public static class Slide {
         private static final String PRE_FIX = "/slide";
         public static final String GET_BY_ID = PRE_FIX + "/{id}";
@@ -93,7 +104,6 @@ public class UrlConstant {
         public static final String CREATE = PRE_FIX + "/create";
         public static final String UPDATE = PRE_FIX + "/{id}";
         public static final String DELETE = PRE_FIX + "/{id}";
-
         private Slide() {
         }
     }

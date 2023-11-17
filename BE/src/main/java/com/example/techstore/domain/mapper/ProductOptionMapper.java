@@ -17,7 +17,8 @@ public interface ProductOptionMapper {
     ProductOption mapProductOptionCreateDtoToProductOption(ProductOptionCreateDto productOptionCreateDto);
 
     @Mappings({
-            @Mapping(target = "productId", source = "product.id")
+            @Mapping(target = "productId", source = "product.id"),
+            @Mapping(target = "productName", source = "product.name")
     })
     ProductOptionDto mapProductOptionToProductOptionDto(ProductOption productOption);
 
