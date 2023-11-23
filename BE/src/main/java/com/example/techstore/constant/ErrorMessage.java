@@ -70,4 +70,14 @@ public class ErrorMessage {
         public static final String ERR_POSITION_ALREADY_EXIST = "exception.slide.position.already.exist";
     }
 
+    public static class DiscountCode {
+        public static final String ERR_NOT_FOUND_ID = "exception.discount.not.found.id";
+        public static final String ERR_NOT_FOUND_CODE = "exception.discount.not.found.code";
+        public static final String EXPIRED_DISCOUNT_CODE = "exception.expired.discount.code";
+        public static final String ERR_ALREADY_USED = "exception.discount.already.used";
+    }
+    public static class UserDiscount {
+        public static final String ERR_NOT_FOUND_ID = "exception.user.discount.not.found.id";
+        public static final String ERR_ALREADY_EXIST = "exception.user.discount.already.exist";
+    }
 }

@@ -1,0 +1,22 @@
+package com.example.techstore.service;
+
+import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
+import com.example.techstore.domain.dto.pagination.PaginationResponseDto;
+import com.example.techstore.domain.dto.request.UserDiscountCreateDto;
+import com.example.techstore.domain.dto.request.UserDiscountUpdateDto;
+import com.example.techstore.domain.dto.response.CommonResponseDto;
+import com.example.techstore.domain.dto.response.UserDiscountDto;
+
+public interface UserDiscountService {
+    UserDiscountDto getById(String id);
+
+    PaginationResponseDto<UserDiscountDto> getAll(PaginationFullRequestDto paginationFullRequestDto);
+
+    UserDiscountDto create(String userId,UserDiscountCreateDto createDto);
+
+    UserDiscountDto update(String id, UserDiscountUpdateDto updateDto);
+
+    UserDiscountDto addDiscountCode(String userId,String code);
+
+    CommonResponseDto deleteById(String id);
+}

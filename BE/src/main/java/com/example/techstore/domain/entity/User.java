@@ -60,4 +60,12 @@ public class User extends DateAuditing {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Cart> carts;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_discounts",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "discount_id")
+    )
+    private List<DiscountCode> discountCodes;
 }
