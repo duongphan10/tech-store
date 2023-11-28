@@ -9,7 +9,7 @@ import com.example.techstore.domain.dto.response.DiscountCodeDto;
 public interface DiscountCodeService {
     DiscountCodeDto getById(String id);
 
-    PaginationResponseDto<DiscountCodeDto> getAll(PaginationFullRequestDto paginationFullRequestDto);
+    PaginationResponseDto<DiscountCodeDto> getAll(String keyword,Boolean type,PaginationFullRequestDto paginationFullRequestDto);
 
     DiscountCodeDto create(DiscountCodeRequestDto createDto);
 

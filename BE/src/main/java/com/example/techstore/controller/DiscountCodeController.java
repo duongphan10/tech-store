@@ -19,6 +19,7 @@ import javax.validation.Valid;
 @RestApiV1
 public class DiscountCodeController {
     private final DiscountCodeService discountCodeService;
+
     @Tag(name = "discountCode-controller")
     @Operation(summary = "API get discount code by id")
     @GetMapping(UrlConstant.DiscountCode.GET_BY_ID)
@@ -29,8 +30,9 @@ public class DiscountCodeController {
     @Tag(name = "discountCode-controller")
     @Operation(summary = "API get all discount code by Page")
     @GetMapping(UrlConstant.DiscountCode.GET_ALL)
-    public ResponseEntity<?> getAllDiscountCode(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
-        return VsResponseUtil.success(discountCodeService.getAll(paginationFullRequestDto));
+    public ResponseEntity<?> getAllDiscountCode(@RequestParam(required = false) Boolean type,
+                                                @Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
+        return VsResponseUtil.success(discountCodeService.getAll(paginationFullRequestDto.getKeyword(), type, paginationFullRequestDto));
     }
 
     @Tag(name = "discountCode-controller")

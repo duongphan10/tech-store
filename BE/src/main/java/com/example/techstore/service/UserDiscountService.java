@@ -11,6 +11,7 @@ public interface UserDiscountService {
     UserDiscountDto getById(String id);
 
     PaginationResponseDto<UserDiscountDto> getAll(PaginationFullRequestDto paginationFullRequestDto);
+    PaginationResponseDto<UserDiscountDto> getAllByUserId(String userId,Boolean type,Boolean status,PaginationFullRequestDto paginationFullRequestDto);
 
     UserDiscountDto create(String userId,UserDiscountCreateDto createDto);
 

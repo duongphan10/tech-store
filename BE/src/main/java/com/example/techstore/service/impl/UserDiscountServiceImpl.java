@@ -56,6 +56,17 @@ public class UserDiscountServiceImpl implements UserDiscountService {
     }
 
     @Override
+    public PaginationResponseDto<UserDiscountDto> getAllByUserId(String userId,Boolean type,Boolean status, PaginationFullRequestDto paginationFullRequestDto) {
+        Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.USER_DISCOUNT);
+        Page<UserDiscount> userDiscountPage = userDiscountRepository.getAllByUserId(userId,type,status,pageable);
+        PagingMeta meta = PaginationUtil
+                .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.USER_DISCOUNT, userDiscountPage);
+
+        List<UserDiscountDto> userDiscountDtoList = userDiscountMapper.mapUserDiscountToUserDiscountDto(userDiscountPage.getContent());
+        return new PaginationResponseDto<>(meta, userDiscountDtoList);
+    }
+
+    @Override
     public UserDiscountDto create(String userId,UserDiscountCreateDto createDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.User.ERR_NOT_FOUND_ID, new String[]{userId}));

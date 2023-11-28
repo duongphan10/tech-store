@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class DiscountCodeRequestDto {
+    @Pattern(regexp = "^[A-Z]{6}$", message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
     @NotNull(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
     private String code;
     @NotNull(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)

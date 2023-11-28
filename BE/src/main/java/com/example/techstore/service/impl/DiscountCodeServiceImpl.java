@@ -36,9 +36,9 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
     }
 
     @Override
-    public PaginationResponseDto<DiscountCodeDto> getAll(PaginationFullRequestDto paginationFullRequestDto) {
+    public PaginationResponseDto<DiscountCodeDto> getAll(String keyword,Boolean type,PaginationFullRequestDto paginationFullRequestDto) {
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.DISCOUNT_CODE);
-        Page<DiscountCode> discountCodePage = discountCodeRepository.getAll(pageable);
+        Page<DiscountCode> discountCodePage = discountCodeRepository.getAll(keyword,type,pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.DISCOUNT_CODE, discountCodePage);
 

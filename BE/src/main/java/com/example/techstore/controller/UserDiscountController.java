@@ -38,6 +38,15 @@ public class UserDiscountController {
     public ResponseEntity<?> getAllUserDiscountCode(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
         return VsResponseUtil.success(userDiscountService.getAll(paginationFullRequestDto));
     }
+    @Tag(name = "user-discount-controller")
+    @Operation(summary = "API get all user discount by userId")
+    @GetMapping(UrlConstant.UserDiscount.GET_BY_USER_ID)
+    public ResponseEntity<?> getAllUserByUserId(@Parameter(name = "principal", hidden = true)
+                                                @CurrentUser UserPrincipal user,
+                                                @Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto,
+                                                @RequestParam(required = false) Boolean type,@RequestParam(required = false) Boolean status) {
+        return VsResponseUtil.success(userDiscountService.getAllByUserId(user.getId(),type,status,paginationFullRequestDto));
+    }
 
     @Tag(name = "user-discount-controller")
     @Operation(summary = "API create user discount code")
