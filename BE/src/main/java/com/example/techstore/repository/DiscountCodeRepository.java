@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface DiscountCodeRepository extends JpaRepository<DiscountCode,String> {
     @Query(value = "SELECT d.* FROM discount_codes d " +
             "WHERE " +
-            "?1 IS NULL OR d.code LIKE CONCAT('%', ?1, '%') " +
-            "AND ?2 IS NULL OR type = ?2 ", nativeQuery = true)
+            "(?1 = '' OR d.code LIKE CONCAT('%', ?1, '%')) " +
+            "AND (?2 IS NULL OR d.type = ?2) ", nativeQuery = true)
     Page<DiscountCode> getAll(String keyword,Boolean type,Pageable pageable);
     Optional<DiscountCode> findByCode(String code);
 

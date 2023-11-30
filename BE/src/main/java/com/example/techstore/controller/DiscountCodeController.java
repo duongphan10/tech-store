@@ -32,7 +32,7 @@ public class DiscountCodeController {
     @GetMapping(UrlConstant.DiscountCode.GET_ALL)
     public ResponseEntity<?> getAllDiscountCode(@RequestParam(required = false) Boolean type,
                                                 @Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
-        return VsResponseUtil.success(discountCodeService.getAll(paginationFullRequestDto.getKeyword(), type, paginationFullRequestDto));
+        return VsResponseUtil.success(discountCodeService.getAll(type, paginationFullRequestDto));
     }
 
     @Tag(name = "discountCode-controller")

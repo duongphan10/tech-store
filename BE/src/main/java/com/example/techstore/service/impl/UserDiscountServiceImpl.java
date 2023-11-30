@@ -45,9 +45,9 @@ public class UserDiscountServiceImpl implements UserDiscountService {
     }
 
     @Override
-    public PaginationResponseDto<UserDiscountDto> getAll(PaginationFullRequestDto paginationFullRequestDto) {
+    public PaginationResponseDto<UserDiscountDto> getAll(Boolean status,PaginationFullRequestDto paginationFullRequestDto) {
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.USER_DISCOUNT);
-        Page<UserDiscount> userDiscountPage = userDiscountRepository.getAll(pageable);
+        Page<UserDiscount> userDiscountPage = userDiscountRepository.getAll(status,pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.USER_DISCOUNT, userDiscountPage);
 

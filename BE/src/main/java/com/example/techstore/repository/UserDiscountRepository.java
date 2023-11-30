@@ -11,13 +11,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDiscountRepository extends JpaRepository<UserDiscount,String> {
-    @Query(value = "SELECT user_discounts.* FROM user_discounts", nativeQuery = true)
-    Page<UserDiscount> getAll(Pageable pageable);
     @Query(value = "SELECT ud.* FROM user_discounts ud " +
-            "INNER JOIN discount_codes ON ud.discount_id = discount_codes.id " +
+            "WHERE ?1 IS NULL OR ud.status = ?1 ", nativeQuery = true)
+    Page<UserDiscount> getAll(Boolean status,Pageable pageable);
+    @Query(value = "SELECT ud.* FROM user_discounts ud " +
+            "INNER JOIN discount_codes dc ON ud.discount_id = dc.id " +
             "WHERE " +
             "   ud.user_id = ?1 " +
-            "   AND (?2 IS NULL OR discount_codes.type = ?2) " +
+            "   AND (?2 IS NULL OR dc.type = ?2) " +
             "   AND (?3 IS NULL OR ud.status = ?3) ", nativeQuery = true)
     Page<UserDiscount> getAllByUserId(String userId,Boolean type,Boolean status,Pageable pageable);
     boolean existsByUserAndDiscountCode(User user, DiscountCode discountCode);
