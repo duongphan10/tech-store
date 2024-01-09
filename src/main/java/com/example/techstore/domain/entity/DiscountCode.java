@@ -25,16 +25,16 @@ public class DiscountCode extends UserDateAuditing {
     @Column(nullable = false)
     private String code;
 
-    @Column(nullable = false,name = "discount_amount")
+    @Column(nullable = false, name = "discount_amount")
     private Long discountAmount;
 
-    @Column(nullable = false,name = "start_date")
+    @Column(nullable = false, name = "start_date")
     private LocalDateTime startDate;
 
-    @Column(nullable = false,name = "expiration_date")
+    @Column(nullable = false, name = "expiration_date")
     private LocalDateTime expirationDate;
 
-    @Column(nullable = false,name = "quantity")
+    @Column(nullable = false, name = "quantity")
     private Long quantity;
 
     @Column(nullable = false)
@@ -42,5 +42,11 @@ public class DiscountCode extends UserDateAuditing {
 
     @ManyToMany(mappedBy = "discountCodes")
     private List<User> users;
+
+    @OneToMany(mappedBy = "shippingDiscountCode", cascade = CascadeType.ALL)
+    private List<Order> shippingOrders;
+
+    @OneToMany(mappedBy = "moneyDiscountCode", cascade = CascadeType.ALL)
+    private List<Order> moneyOrders;
 
 }

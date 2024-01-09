@@ -20,4 +20,5 @@ public class MessageConstant {
     public static final String DELETE_SLIDE_SUCCESSFULLY = "You successfully deleted the slide";
     public static final String DELETE_DISCOUNT_CODE_SUCCESSFULLY = "You successfully deleted the slide";
     public static final String DELETE_USER_DISCOUNT_SUCCESSFULLY = "You successfully deleted the user discount";
+    public static final String DELETE_ORDER_SUCCESSFULLY = "You successfully deleted the order";
 }

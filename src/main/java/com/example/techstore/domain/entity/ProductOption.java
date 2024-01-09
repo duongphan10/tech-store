@@ -44,4 +44,7 @@ public class ProductOption extends UserDateAuditing {
     @OneToMany(mappedBy = "productOption", cascade = CascadeType.ALL)
     private List<Cart> carts;
 
+    @OneToMany(mappedBy = "productOption", cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetails;
+
 }

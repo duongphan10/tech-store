@@ -36,9 +36,9 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
     }
 
     @Override
-    public PaginationResponseDto<DiscountCodeDto> getAll(Boolean type,PaginationFullRequestDto paginationFullRequestDto) {
+    public PaginationResponseDto<DiscountCodeDto> getAll(Boolean type, PaginationFullRequestDto paginationFullRequestDto) {
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.DISCOUNT_CODE);
-        Page<DiscountCode> discountCodePage = discountCodeRepository.getAll(paginationFullRequestDto.getKeyword(),type,pageable);
+        Page<DiscountCode> discountCodePage = discountCodeRepository.getAll(paginationFullRequestDto.getKeyword(), type, pageable);
 
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.DISCOUNT_CODE, discountCodePage);
@@ -57,7 +57,7 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
     public DiscountCodeDto update(String id, DiscountCodeRequestDto updateDto) {
         DiscountCode discountCode = discountCodeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.DiscountCode.ERR_NOT_FOUND_ID, new String[]{id}));
-        discountCodeMapper.updateDiscountCode(discountCode,updateDto);
+        discountCodeMapper.updateDiscountCode(discountCode, updateDto);
         return discountCodeMapper.mapDiscountCodeToDiscountCodeDto(discountCodeRepository.save(discountCode));
     }
 
