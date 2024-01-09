@@ -1,11 +1,9 @@
 package com.example.techstore.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,21 +11,17 @@ import java.util.Set;
 @Setter
 @Builder
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "status")
+public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @Column(nullable = false)
     private String name;
-
     @Column(nullable = true)
     private String description;
 
-    //Link to table User
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
-    @JsonIgnore
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
 }
