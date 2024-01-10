@@ -10,11 +10,26 @@ import java.util.Objects;
 
 public class FileImageValidator implements ConstraintValidator<ValidFileImage, MultipartFile> {
 
+    private String fileSizeExceededMessage;
+
+    @Override
+    public void initialize(ValidFileImage constraintAnnotation) {
+        this.fileSizeExceededMessage = constraintAnnotation.fileSizeExceededMessage();
+    }
+
     @Override
     public boolean isValid(MultipartFile file, ConstraintValidatorContext constraintValidatorContext) {
-        if (file != null) {
-            String contentType = file.getContentType();
-            return isSupportedContentType(Objects.requireNonNull(contentType));
+        if (file == null)
+            return true;
+        String contentType = file.getContentType();
+        if (isSupportedContentType(Objects.requireNonNull(contentType))) {
+            if (file.getSize() > CommonConstant.MAX_IMAGE_SIZE_BYTES) {
+                constraintValidatorContext.disableDefaultConstraintViolation();
+                constraintValidatorContext.buildConstraintViolationWithTemplate(fileSizeExceededMessage)
+                        .addConstraintViolation();
+                return false;
+            }
+            return true;
         }
         return false;
     }

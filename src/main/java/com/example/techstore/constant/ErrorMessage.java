@@ -101,4 +101,9 @@ public class ErrorMessage {
         public static final String ERR_INVALID_STATUS_UPDATE = "exception.order.detail.invalid.status";
     }
 
+    public static class Review {
+        public static final String ERR_NOT_FOUND_ID = "exception.review.not.found.id";
+        public static final String ERR_ALREADY_EXIST_WITH_ORDER_DETAIL = "exception.review.already.exist.with.order.detail";
+    }
+
 }
