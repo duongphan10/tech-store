@@ -12,27 +12,25 @@ import javax.persistence.*;
 @Setter
 @Builder
 @Entity
-@Table(name = "order_details")
-public class OrderDetail extends UserDateAuditing {
+@Table(name = "review_files")
+public class ReviewFile extends UserDateAuditing {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
     private String id;
+
     @Column(nullable = false)
-    private Integer quantity;
+    private String path;
+
     @Column(nullable = false)
-    private Long price;
+    private String name;
+
+    @Column(nullable = false)
+    private Long size;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "FK_DETAIL_ORDER"))
-    private Order order;
-
-    @ManyToOne
-    @JoinColumn(name = "product_option_id", foreignKey = @ForeignKey(name = "FK_DETAIL_OPTION"))
-    private ProductOption productOption;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "orderDetail")
+    @JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "FK_FILE_REVIEW"))
     private Review review;
 
 }

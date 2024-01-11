@@ -68,4 +68,8 @@ public class User extends DateAuditing {
             inverseJoinColumns = @JoinColumn(name = "discount_id")
     )
     private List<DiscountCode> discountCodes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Review> reviews;
+
 }

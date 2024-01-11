@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,27 +13,29 @@ import javax.persistence.*;
 @Setter
 @Builder
 @Entity
-@Table(name = "order_details")
-public class OrderDetail extends UserDateAuditing {
+@Table(name = "reviews")
+public class Review extends UserDateAuditing {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
     private String id;
+
     @Column(nullable = false)
-    private Integer quantity;
+    private Integer star;
+
     @Column(nullable = false)
-    private Long price;
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "FK_DETAIL_ORDER"))
-    private Order order;
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_REVIEW_USER"))
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "product_option_id", foreignKey = @ForeignKey(name = "FK_DETAIL_OPTION"))
-    private ProductOption productOption;
+    @OneToOne
+    @JoinColumn(name = "order_detail_id", foreignKey = @ForeignKey(name = "FK_REVIEW_ORDER_DETAIL"))
+    private OrderDetail orderDetail;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "orderDetail")
-    private Review review;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "review")
+    private List<ReviewFile> files;
 
 }

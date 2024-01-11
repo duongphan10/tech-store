@@ -1,6 +1,7 @@
 package com.example.techstore.validator.annotation;
 
-import com.example.techstore.validator.FileImageValidator;
+
+import com.example.techstore.validator.ListFileValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,12 +10,14 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.PARAMETER})
-@Constraint(validatedBy = {FileImageValidator.class})
-public @interface ValidFileImage {
+@Constraint(validatedBy = {ListFileValidator.class})
+public @interface ValidListFile {
 
-    String message() default "invalid.file-image";
+    String message() default "invalid.number.file";
 
-    String fileSizeExceededMessage() default "invalid.file.image.size";
+    String fileTypeNotAllowedMessage() default "invalid.file.type";
+
+    String fileSizeExceededMessage() default "invalid.file.size";
 
     Class<?>[] groups() default {};
 
