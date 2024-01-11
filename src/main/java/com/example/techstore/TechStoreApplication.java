@@ -35,6 +35,7 @@ public class TechStoreApplication {
             if (roleRepository.count() == 0) {
                 roleRepository.save(new Role(null, RoleConstant.USER, null, null));
                 roleRepository.save(new Role(null, RoleConstant.ADMIN, null, null));
+                roleRepository.save(new Role(null, RoleConstant.SUPPORT, null, null));
             }
         };
     }

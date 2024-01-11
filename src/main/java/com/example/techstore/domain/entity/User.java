@@ -68,4 +68,15 @@ public class User extends DateAuditing {
             inverseJoinColumns = @JoinColumn(name = "discount_id")
     )
     private List<DiscountCode> discountCodes;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_rooms",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id")
+    )
+    private List<Room> rooms;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserRoom> userRooms;
 }

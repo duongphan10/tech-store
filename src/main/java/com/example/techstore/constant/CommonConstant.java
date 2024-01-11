@@ -34,4 +34,19 @@ public class CommonConstant {
     public static final Integer NUM_OF_USER_PER_PAGE = 5;
     public static final Integer NUM_OF_PRODUCT_PER_PAGE = 20;
 
+    public static class Key {
+        public static final String USER_ID = "userId";
+        public static final String ACCESS_TOKEN = "accessToken";
+    }
+
+    public static class Event {
+        //Client
+        public static final String CLIENT_SEND_MESSAGE = "client_send_message";
+        public static final String CLIENT_JOIN_ROOM = "client_join_room";
+
+        //Server
+        public static final String SERVER_SEND_ERROR = "server_send_error";
+        public static final String SERVER_SEND_MESSAGE = "server_send_message";
+        public static final String SERVER_SEND_NOTIFICATION = "server_send_notification";
+    }
 }

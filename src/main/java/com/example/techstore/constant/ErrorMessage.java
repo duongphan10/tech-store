@@ -76,8 +76,26 @@ public class ErrorMessage {
         public static final String EXPIRED_DISCOUNT_CODE = "exception.expired.discount.code";
         public static final String ERR_ALREADY_USED = "exception.discount.already.used";
     }
+
     public static class UserDiscount {
         public static final String ERR_NOT_FOUND_ID = "exception.user.discount.not.found.id";
         public static final String ERR_ALREADY_EXIST = "exception.user.discount.already.exist";
+    }
+
+    public static class UserRoom {
+        public static final String ERR_NOT_FOUND_ID = "exception.user.room.not.found.id";
+        public static final String ERR_ALREADY_EXIST = "exception.user.room.already.exist";
+    }
+
+    public static class Room {
+        public static final String ERR_NOT_FOUND_ID = "exception.room.not.found.id";
+    }
+
+    public static class Message {
+        public static final String ERR_NOT_FOUND_ID = "exception.message.not.found.id";
+    }
+
+    public static class File {
+        public static final String ERR_NOT_FOUND_ID = "exception.file.not.found.id";
     }
 }

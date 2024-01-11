@@ -19,6 +19,21 @@ public class UploadFileUtil {
 
     private final Cloudinary cloudinary;
 
+    private static String getResourceType(MultipartFile file) {
+        String contentType = file.getContentType();
+        if (contentType != null) {
+            if (contentType.startsWith("image/")) {
+                return "image";
+            } else if (contentType.startsWith("video/")) {
+                return "video";
+            } else {
+                return "auto";
+            }
+        } else {
+            throw new UploadFileException("Invalid file!");
+        }
+    }
+
     public String uploadFile(MultipartFile file) {
         try {
             String resourceType = getResourceType(file);
@@ -68,21 +83,6 @@ public class UploadFileUtil {
             log.info(String.format("Destroy image public id %s %s", publicId, result.toString()));
         } catch (IOException e) {
             throw new UploadFileException("Remove image failed!");
-        }
-    }
-
-    private static String getResourceType(MultipartFile file) {
-        String contentType = file.getContentType();
-        if (contentType != null) {
-            if (contentType.startsWith("image/")) {
-                return "image";
-            } else if (contentType.startsWith("video/")) {
-                return "video";
-            } else {
-                return "auto";
-            }
-        } else {
-            throw new UploadFileException("Invalid file!");
         }
     }
 

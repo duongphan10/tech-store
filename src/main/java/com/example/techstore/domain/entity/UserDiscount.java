@@ -29,9 +29,9 @@ public class UserDiscount extends UserDateAuditing {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(nullable = true,name = "applied_date")
+    @Column(nullable = true, name = "applied_date")
     private LocalDateTime appliedDate;
 
-    @Column(nullable = true,name = "status")
+    @Column(nullable = true, name = "status")
     private Boolean status;
 }

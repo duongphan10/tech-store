@@ -155,4 +155,56 @@ public enum SortByDataConstant implements SortByInterface {
             }
         }
     },
+    USER_ROOM {
+        @Override
+        public String getSortBy(String sortBy) {
+            switch (sortBy) {
+                case "lastModifiedDate":
+                    return "last_modified_date";
+                case "appliedDate":
+                    return "appliedDate";
+                default:
+                    return "room_id";
+            }
+        }
+    },
+    ROOM {
+        @Override
+        public String getSortBy(String sortBy) {
+            switch (sortBy) {
+                case "lastModifiedDate":
+                    return "last_modified_date";
+                case "appliedDate":
+                    return "appliedDate";
+                default:
+                    return "name";
+            }
+        }
+    },
+    MESSAGE {
+        @Override
+        public String getSortBy(String sortBy) {
+            switch (sortBy) {
+                case "lastModifiedDate":
+                    return "last_modified_date";
+                case "appliedDate":
+                    return "appliedDate";
+                default:
+                    return "created_date";
+            }
+        }
+    },
+    FILE {
+        @Override
+        public String getSortBy(String sortBy) {
+            switch (sortBy) {
+                case "lastModifiedDate":
+                    return "last_modified_date";
+                case "appliedDate":
+                    return "appliedDate";
+                default:
+                    return "size";
+            }
+        }
+    },
 }

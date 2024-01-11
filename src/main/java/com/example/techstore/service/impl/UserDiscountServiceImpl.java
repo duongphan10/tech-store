@@ -27,7 +27,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -45,9 +44,9 @@ public class UserDiscountServiceImpl implements UserDiscountService {
     }
 
     @Override
-    public PaginationResponseDto<UserDiscountDto> getAll(Boolean status,PaginationFullRequestDto paginationFullRequestDto) {
+    public PaginationResponseDto<UserDiscountDto> getAll(Boolean status, PaginationFullRequestDto paginationFullRequestDto) {
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.USER_DISCOUNT);
-        Page<UserDiscount> userDiscountPage = userDiscountRepository.getAll(status,pageable);
+        Page<UserDiscount> userDiscountPage = userDiscountRepository.getAll(status, pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.USER_DISCOUNT, userDiscountPage);
 
@@ -56,9 +55,9 @@ public class UserDiscountServiceImpl implements UserDiscountService {
     }
 
     @Override
-    public PaginationResponseDto<UserDiscountDto> getAllByUserId(String userId,Boolean type,Boolean status, PaginationFullRequestDto paginationFullRequestDto) {
+    public PaginationResponseDto<UserDiscountDto> getAllByUserId(String userId, Boolean type, Boolean status, PaginationFullRequestDto paginationFullRequestDto) {
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.USER_DISCOUNT);
-        Page<UserDiscount> userDiscountPage = userDiscountRepository.getAllByUserId(userId,type,status,pageable);
+        Page<UserDiscount> userDiscountPage = userDiscountRepository.getAllByUserId(userId, type, status, pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.USER_DISCOUNT, userDiscountPage);
 
@@ -67,15 +66,15 @@ public class UserDiscountServiceImpl implements UserDiscountService {
     }
 
     @Override
-    public UserDiscountDto create(String userId,UserDiscountCreateDto createDto) {
+    public UserDiscountDto create(String userId, UserDiscountCreateDto createDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.User.ERR_NOT_FOUND_ID, new String[]{userId}));
         DiscountCode discountCode = discountCodeRepository.findById(createDto.getDiscountCodeId())
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.DiscountCode.ERR_NOT_FOUND_ID, new String[]{createDto.getDiscountCodeId()}));
-        if(userDiscountRepository.existsByUserAndDiscountCode(user,discountCode)){
+        if (userDiscountRepository.existsByUserAndDiscountCode(user, discountCode)) {
             throw new AlreadyExistException(ErrorMessage.UserDiscount.ERR_ALREADY_EXIST);
         }
-        if(discountCode.getQuantity() <= 0){
+        if (discountCode.getQuantity() <= 0) {
             throw new NotFoundException(ErrorMessage.DiscountCode.EXPIRED_DISCOUNT_CODE);
         }
         UserDiscount userDiscount = userDiscountMapper.mapUserDiscountCreateDtoToUserDiscount(createDto);
@@ -90,21 +89,21 @@ public class UserDiscountServiceImpl implements UserDiscountService {
     public UserDiscountDto update(String id, UserDiscountUpdateDto updateDto) {
         UserDiscount userDiscount = userDiscountRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.UserDiscount.ERR_NOT_FOUND_ID, new String[]{id}));
-        userDiscountMapper.updateUserDiscount(userDiscount,updateDto);
+        userDiscountMapper.updateUserDiscount(userDiscount, updateDto);
         userDiscount.setStatus(false);
         return userDiscountMapper.mapUserDiscountToUserDiscountDto(userDiscountRepository.save(userDiscount));
     }
 
     @Override
-    public UserDiscountDto addDiscountCode(String userId,String code) {
+    public UserDiscountDto addDiscountCode(String userId, String code) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.User.ERR_NOT_FOUND_ID, new String[]{userId}));
         DiscountCode discountCode = discountCodeRepository.findByCode(code)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.DiscountCode.ERR_NOT_FOUND_CODE, new String[]{code}));
-        if(userDiscountRepository.existsByUserAndDiscountCode(user,discountCode)){
+        if (userDiscountRepository.existsByUserAndDiscountCode(user, discountCode)) {
             throw new AlreadyExistException(ErrorMessage.DiscountCode.ERR_ALREADY_USED);
         }
-        if(discountCode.getQuantity() <= 0){
+        if (discountCode.getQuantity() <= 0) {
             throw new NotFoundException(ErrorMessage.DiscountCode.EXPIRED_DISCOUNT_CODE);
         }
         UserDiscount userDiscount = new UserDiscount();
