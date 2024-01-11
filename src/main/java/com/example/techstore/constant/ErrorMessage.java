@@ -82,13 +82,28 @@ public class ErrorMessage {
         public static final String ERR_ALREADY_EXIST = "exception.user.discount.already.exist";
     }
 
-    public static class UserRoom {
-        public static final String ERR_NOT_FOUND_ID = "exception.user.room.not.found.id";
-        public static final String ERR_ALREADY_EXIST = "exception.user.room.already.exist";
+    public static class Order {
+        public static final String ERR_NOT_FOUND_ID = "exception.order.not.found.id";
+        public static final String ERR_INVALID_ADDRESS = "exception.order.invalid.address";
+        public static final String ERR_INVALID_SHIP_DISCOUNT_CODE = "exception.order.invalid.ship.code";
+        public static final String ERR_USER_NOT_SHIP_DISCOUNT_CODE = "exception.user.not.ship.code";
+        public static final String ERR_SHIP_DISCOUNT_CODE_ALREADY_USE = "exception.ship.code.already.use";
+        public static final String ERR_SHIP_DISCOUNT_CODE_NOT_BE_USED = "exception.ship.code.not.be.used";
+        public static final String ERR_INVALID_MONEY_DISCOUNT_CODE = "exception.order.invalid.money.code";
+        public static final String ERR_USER_NOT_MONEY_DISCOUNT_CODE = "exception.user.not.money.code";
+        public static final String ERR_MONEY_DISCOUNT_CODE_ALREADY_USE = "exception.money.code.already.use";
+        public static final String ERR_MONEY_DISCOUNT_CODE_NOT_BE_USED = "exception.money.code.not.be.used";
+        public static final String ERR_INVALID_PRODUCT_OPTION = "exception.invalid.product.option";
     }
 
-    public static class Room {
-        public static final String ERR_NOT_FOUND_ID = "exception.room.not.found.id";
+    public static class OrderDetail {
+        public static final String ERR_NOT_FOUND_ID = "exception.order.detail.not.found.id";
+        public static final String ERR_INVALID_STATUS_UPDATE = "exception.order.detail.invalid.status";
+    }
+
+    public static class Review {
+        public static final String ERR_NOT_FOUND_ID = "exception.review.not.found.id";
+        public static final String ERR_ALREADY_EXIST_WITH_ORDER_DETAIL = "exception.review.already.exist.with.order.detail";
     }
 
     public static class Message {
@@ -97,5 +112,14 @@ public class ErrorMessage {
 
     public static class File {
         public static final String ERR_NOT_FOUND_ID = "exception.file.not.found.id";
+    }
+
+    public static class UserRoom {
+        public static final String ERR_NOT_FOUND_ID = "exception.user.room.not.found.id";
+        public static final String ERR_ALREADY_EXIST = "exception.user.room.already.exist";
+    }
+
+    public static class Room {
+        public static final String ERR_NOT_FOUND_ID = "exception.room.not.found.id";
     }
 }

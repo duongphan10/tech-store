@@ -17,5 +17,6 @@ public interface FileMapper {
             @Mapping(target = "createdDate", source = "createdDate", dateFormat = CommonConstant.PATTERN_DATE_TIME),
     })
     FileDto mapFileToFileDto(File file);
+
     List<FileDto> mapFileToFileDto(List<File> files);
 }

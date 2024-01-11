@@ -7,7 +7,10 @@ import com.example.techstore.domain.dto.response.RoomDto;
 
 public interface RoomService {
     RoomDto getById(String id);
+
     PaginationResponseDto<RoomDto> getAll(PaginationFullRequestDto paginationFullRequestDto);
+
     RoomDto create(String userId);
+
     CommonResponseDto deleteById(String id);
 }

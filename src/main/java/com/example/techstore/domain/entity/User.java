@@ -69,6 +69,9 @@ public class User extends DateAuditing {
     )
     private List<DiscountCode> discountCodes;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Review> reviews;
+
     @ManyToMany
     @JoinTable(
             name = "user_rooms",
@@ -79,4 +82,5 @@ public class User extends DateAuditing {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserRoom> userRooms;
+
 }

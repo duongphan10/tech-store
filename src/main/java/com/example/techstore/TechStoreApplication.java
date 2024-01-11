@@ -1,8 +1,11 @@
 package com.example.techstore;
 
 import com.example.techstore.constant.RoleConstant;
+import com.example.techstore.constant.StatusConstant;
 import com.example.techstore.domain.entity.Role;
+import com.example.techstore.domain.entity.Status;
 import com.example.techstore.repository.RoleRepository;
+import com.example.techstore.repository.StatusRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +19,7 @@ import org.springframework.core.env.Environment;
 @SpringBootApplication
 public class TechStoreApplication {
     private final RoleRepository roleRepository;
+    private final StatusRepository statusRepository;
 
     public static void main(String[] args) {
         Environment env = SpringApplication.run(TechStoreApplication.class, args).getEnvironment();
@@ -36,6 +40,14 @@ public class TechStoreApplication {
                 roleRepository.save(new Role(null, RoleConstant.USER, null, null));
                 roleRepository.save(new Role(null, RoleConstant.ADMIN, null, null));
                 roleRepository.save(new Role(null, RoleConstant.SUPPORT, null, null));
+            }
+            //init status
+            if (statusRepository.count() == 0) {
+                statusRepository.save(new Status(1, StatusConstant.PENDING.getName(), null, null));
+                statusRepository.save(new Status(2, StatusConstant.WAITING.getName(), null, null));
+                statusRepository.save(new Status(3, StatusConstant.DELIVERING.getName(), null, null));
+                statusRepository.save(new Status(4, StatusConstant.DELIVERED.getName(), null, null));
+                statusRepository.save(new Status(5, StatusConstant.CANCELLED.getName(), null, null));
             }
         };
     }

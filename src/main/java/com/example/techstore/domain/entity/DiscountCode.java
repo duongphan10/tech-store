@@ -43,4 +43,10 @@ public class DiscountCode extends UserDateAuditing {
     @ManyToMany(mappedBy = "discountCodes")
     private List<User> users;
 
+    @OneToMany(mappedBy = "shippingDiscountCode", cascade = CascadeType.ALL)
+    private List<Order> shippingOrders;
+
+    @OneToMany(mappedBy = "moneyDiscountCode", cascade = CascadeType.ALL)
+    private List<Order> moneyOrders;
+
 }

@@ -136,6 +136,42 @@ public class UrlConstant {
         }
     }
 
+    public static class Order {
+        private static final String PRE_FIX = "/order";
+        public static final String GET_BY_ID = PRE_FIX + "/{id}";
+        public static final String GET_ALL = PRE_FIX + "/all";
+        public static final String GET_MY_ALL = PRE_FIX + "/all/my";
+        public static final String CREATE = PRE_FIX + "/create";
+
+        public static final String UPDATE = PRE_FIX + "/{id}";
+        public static final String DELETE = PRE_FIX + "/{id}";
+
+        private Order() {
+        }
+    }
+
+    public static class OrderDetail {
+        private static final String PRE_FIX = "/order-detail";
+        public static final String GET_BY_ID = PRE_FIX + "/{id}";
+        public static final String GET_ALL = PRE_FIX + "/all/{orderId}";
+
+        private OrderDetail() {
+        }
+    }
+
+    public static class Review {
+        private static final String PRE_FIX = "/review";
+        public static final String GET_BY_ID = PRE_FIX + "/{id}";
+        public static final String GET_ALL = PRE_FIX + "/all";
+        public static final String CREATE = PRE_FIX + "/create";
+
+        public static final String UPDATE = PRE_FIX + "/{id}";
+        public static final String DELETE = PRE_FIX + "/{id}";
+
+        private Review() {
+        }
+    }
+
     public static class Room {
         private static final String PRE_FIX = "/room";
         public static final String GET_BY_ID = PRE_FIX + "/{id}";
@@ -169,7 +205,7 @@ public class UrlConstant {
         public static final String DELETE = PRE_FIX + "/{id}";
 
         private File() {
-
         }
     }
+
 }

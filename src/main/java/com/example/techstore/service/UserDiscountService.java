@@ -9,10 +9,16 @@ import com.example.techstore.domain.dto.response.UserDiscountDto;
 
 public interface UserDiscountService {
     UserDiscountDto getById(String id);
+
     PaginationResponseDto<UserDiscountDto> getAll(Boolean status, PaginationFullRequestDto paginationFullRequestDto);
+
     PaginationResponseDto<UserDiscountDto> getAllByUserId(String userId, Boolean type, Boolean status, PaginationFullRequestDto paginationFullRequestDto);
+
     UserDiscountDto create(String userId, UserDiscountCreateDto createDto);
+
     UserDiscountDto update(String id, UserDiscountUpdateDto updateDto);
+
     UserDiscountDto addDiscountCode(String userId, String code);
+
     CommonResponseDto deleteById(String id);
 }
