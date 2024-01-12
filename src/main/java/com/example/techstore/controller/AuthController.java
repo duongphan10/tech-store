@@ -3,7 +3,9 @@ package com.example.techstore.controller;
 import com.example.techstore.base.RestApiV1;
 import com.example.techstore.base.VsResponseUtil;
 import com.example.techstore.constant.UrlConstant;
+import com.example.techstore.domain.dto.request.ForgotPasswordRequestDto;
 import com.example.techstore.domain.dto.request.LoginRequestDto;
+import com.example.techstore.domain.dto.request.VerifyRequestDto;
 import com.example.techstore.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,18 @@ public class AuthController {
     public ResponseEntity<?> logout(HttpServletRequest request,
                                     HttpServletResponse response, Authentication authentication) {
         return VsResponseUtil.success(authService.logout(request, response, authentication));
+    }
+
+    @Operation(summary = "API send verification forgot password")
+    @PostMapping(UrlConstant.Auth.SEND_VERIFY)
+    public ResponseEntity<?> sendVerificationForgotPassword(@Valid @RequestBody ForgotPasswordRequestDto forgotPasswordRequestDto) {
+        return VsResponseUtil.success(authService.forgotPassword(forgotPasswordRequestDto));
+    }
+
+    @Operation(summary = "API verify forgot password")
+    @PostMapping(value = UrlConstant.Auth.VERIFY)
+    public ResponseEntity<?> verifyForgotPassword(@Valid @RequestBody VerifyRequestDto verifyRequestDto) {
+        return VsResponseUtil.success(authService.verifyForgotPassword(verifyRequestDto));
     }
 
 }

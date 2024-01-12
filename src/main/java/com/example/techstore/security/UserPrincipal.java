@@ -20,19 +20,21 @@ public class UserPrincipal implements UserDetails {
     @JsonIgnore
     private final String password;
 
+    private final Boolean enabled;
+
     private final Collection<? extends GrantedAuthority> authorities;
 
     public UserPrincipal(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this(null, null, username, password, authorities);
+        this(null, null, username, password, null, authorities);
     }
 
-    public UserPrincipal(String id, String fullName, String username, String password,
+    public UserPrincipal(String id, String fullName, String username, String password, Boolean enabled,
                          Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.fullName = fullName;
         this.username = username;
         this.password = password;
-
+        this.enabled = enabled;
         if (authorities == null) {
             this.authorities = null;
         } else {
@@ -44,7 +46,7 @@ public class UserPrincipal implements UserDetails {
         List<GrantedAuthority> authorities = new LinkedList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
         return new UserPrincipal(user.getId(), user.getFullName(),
-                user.getUsername(), user.getPassword(), authorities);
+                user.getUsername(), user.getPassword(), user.getEnabled(), authorities);
     }
 
     public String getId() {
@@ -87,7 +89,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     public boolean equals(Object object) {
