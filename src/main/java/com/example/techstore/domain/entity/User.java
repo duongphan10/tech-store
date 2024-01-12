@@ -36,7 +36,7 @@ public class User extends DateAuditing {
     private String fullName;
 
     @Column(nullable = true)
-    private String gender;
+    private Boolean gender;
 
     @Column(nullable = true)
     private LocalDate birthday;
@@ -44,11 +44,14 @@ public class User extends DateAuditing {
     @Column(nullable = false, unique = true)
     private String phone;
 
-    @Column(nullable = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = true)
     private String avatar;
+
+    @Column(nullable = false)
+    private Boolean enabled;
 
     //Link to table Role
     @ManyToOne
@@ -71,5 +74,9 @@ public class User extends DateAuditing {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Review> reviews;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Code code;
 
 }

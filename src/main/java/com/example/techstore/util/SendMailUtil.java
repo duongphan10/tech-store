@@ -2,7 +2,9 @@ package com.example.techstore.util;
 
 import com.example.techstore.domain.dto.common.DataMailDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,9 @@ import java.util.Objects;
 @Component
 @RequiredArgsConstructor
 public class SendMailUtil {
+
+    @Value("${mail.from_to}")
+    public String fromName;
 
     private final JavaMailSender mailSender;
 
@@ -33,6 +38,7 @@ public class SendMailUtil {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                 StandardCharsets.UTF_8.name());
+        helper.setFrom(Objects.requireNonNull(((JavaMailSenderImpl) mailSender).getUsername()), fromName);
         helper.setTo(mail.getTo());
         helper.setSubject(mail.getSubject());
         Context context = new Context();

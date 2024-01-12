@@ -22,12 +22,7 @@ public interface UserMapper {
     List<UserDto> mapUsersToUserDtos(List<User> user);
 
     @Mappings({
-            @Mapping(target = "username", source = "username"),
-            @Mapping(target = "fullName", source = "fullName"),
-            @Mapping(target = "gender", source = "gender"),
             @Mapping(target = "birthday", source = "birthday", dateFormat = CommonConstant.PATTERN_DATE),
-            @Mapping(target = "phone", source = "phone"),
-            @Mapping(target = "email", source = "email"),
             @Mapping(target = "avatar", source = "avatar", ignore = true)
     })
     void updateUser(@MappingTarget User user, UserUpdateDto userUpdateDto);

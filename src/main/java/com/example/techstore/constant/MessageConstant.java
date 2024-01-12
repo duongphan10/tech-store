@@ -10,7 +10,9 @@ public class MessageConstant {
     public static final String VERIFY_FORGOT_PASSWORD_SUCCESSFULLY = "Verify forgot password successfully";
     public static final String VERIFY_FORGOT_PASSWORD_INVALID = "Verification code invalid ";
     public static final String VERIFY_FORGOT_PASSWORD_EXPIRED = "Verification code expired";
+    public static final String ERR_VERIFY_FORGOT_PASSWORD = "Error verifying code";
     public static final String CREATE_NEW_PASSWORD_SUCCESSFULLY = "Create new password successfully";
+    public static String DELETE_USER_SUCCESSFULLY = "You successfully deleted the user";
     public static String DELETE_ADDRESS_SUCCESSFULLY = "You successfully deleted the address";
     public static final String DELETE_CATEGORY_SUCCESSFULLY = "You successfully deleted the category";
     public static String DELETE_NEWS_SUCCESSFULLY = "You successfully deleted the news";
