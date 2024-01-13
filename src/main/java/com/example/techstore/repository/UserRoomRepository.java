@@ -16,6 +16,7 @@ import java.util.Optional;
 public interface UserRoomRepository extends JpaRepository<UserRoom, UserRoomId> {
     boolean existsUserRoomByUser(User user);
 
+    boolean existsUserRoomById(UserRoomId userRoomId);
     boolean existsById(UserRoomId userRoomId);
 
     @Query(value = "SELECT ur.* FROM user_rooms ur " +

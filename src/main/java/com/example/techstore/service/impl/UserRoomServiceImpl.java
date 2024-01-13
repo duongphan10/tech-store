@@ -69,12 +69,4 @@ public class UserRoomServiceImpl implements UserRoomService {
         return userRoomMapper.mapUserRoomToUserRoomDto(userRoomRepository.save(userRoom));
     }
 
-    @Override
-    public CommonResponseDto deleteById(UserRoomId userRoomId) {
-        UserRoom userRoomFind = userRoomRepository.findById(userRoomId)
-                .orElseThrow(() -> new NotFoundException(ErrorMessage.UserRoom.ERR_ALREADY_EXIST, new String[]{userRoomId.getUserId()}));
-        userRoomRepository.delete(userRoomFind);
-        return new CommonResponseDto(true, MessageConstant.DELETE_USER_ROOM_SUCCESSFULLY);
-    }
-
 }

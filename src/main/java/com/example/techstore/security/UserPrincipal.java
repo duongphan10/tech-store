@@ -50,6 +50,14 @@ public class UserPrincipal implements UserDetails {
                 user.getUsername(), user.getPassword(), authorities);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
     @Override
     public String getUsername() {
         return username;

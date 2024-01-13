@@ -22,7 +22,7 @@ public class Message extends UserDateAuditing {
     @Column(insertable = false, updatable = false, nullable = false, columnDefinition = "CHAR(36)")
     private String id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String message;
 
     @ManyToOne

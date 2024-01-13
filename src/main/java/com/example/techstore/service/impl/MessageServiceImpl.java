@@ -9,10 +9,7 @@ import com.example.techstore.domain.dto.pagination.PaginationResponseDto;
 import com.example.techstore.domain.dto.pagination.PagingMeta;
 import com.example.techstore.domain.dto.request.MessageRequestDto;
 import com.example.techstore.domain.dto.response.MessageDto;
-import com.example.techstore.domain.entity.File;
-import com.example.techstore.domain.entity.Message;
-import com.example.techstore.domain.entity.Room;
-import com.example.techstore.domain.entity.UserRoom;
+import com.example.techstore.domain.entity.*;
 import com.example.techstore.domain.mapper.MessageMapper;
 import com.example.techstore.exception.NotFoundException;
 import com.example.techstore.repository.*;
@@ -52,15 +49,25 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public MessageDto create(MessageRequestDto messageRequestDto) {
+    public MessageDto create(String userId,MessageRequestDto messageRequestDto) {
+
         Room room = roomRepository.findById(messageRequestDto.getRoomId())
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Room.ERR_NOT_FOUND_ID, new String[]{messageRequestDto.getRoomId()}));
+        if(!userRoomRepository.existsUserRoomById(new UserRoomId(room.getId(), userId))){
+            throw new NotFoundException(ErrorMessage.UserRoom.ERR_NOT_FOUND_ID,new String[]{messageRequestDto.getRoomId()});
+        }
+
+        List<MultipartFile> multipartFiles = messageRequestDto.getMultipartFile();
+        String messageContent = messageRequestDto.getMessage();
+        if ((messageContent == null || messageContent.isEmpty()) && (multipartFiles == null || multipartFiles.isEmpty())) {
+            throw new NotFoundException(ErrorMessage.Message.ERR_NOT_FOUND_MESSAGE_OR_FILE);
+        }
 
         Message me = new Message();
         me.setMessage(messageRequestDto.getMessage());
         me.setRoom(room);
         messageRepository.save(me);
-        List<MultipartFile> multipartFiles = messageRequestDto.getMultipartFile();
+
         List<File> files = new ArrayList<>();
         if (multipartFiles != null) {
             for (MultipartFile multipartFile : multipartFiles) {

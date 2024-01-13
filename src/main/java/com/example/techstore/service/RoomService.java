@@ -12,5 +12,4 @@ public interface RoomService {
 
     RoomDto create(String userId);
 
-    CommonResponseDto deleteById(String id);
 }

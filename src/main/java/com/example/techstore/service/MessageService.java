@@ -8,5 +8,5 @@ import com.example.techstore.domain.dto.response.MessageDto;
 public interface MessageService {
     PaginationResponseDto<MessageDto> getAll(String roomId, String message, PaginationFullRequestDto paginationFullRequestDto);
 
-    MessageDto create(MessageRequestDto messageRequestDto);
+    MessageDto create(String userId,MessageRequestDto messageRequestDto);
 }

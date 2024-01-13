@@ -4,7 +4,6 @@ import com.example.techstore.base.RestApiV1;
 import com.example.techstore.base.VsResponseUtil;
 import com.example.techstore.constant.UrlConstant;
 import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
-import com.example.techstore.domain.dto.request.RoomRequestDto;
 import com.example.techstore.security.CurrentUser;
 import com.example.techstore.security.UserPrincipal;
 import com.example.techstore.service.RoomService;
@@ -40,15 +39,7 @@ public class RoomController {
     @Tag(name = "room-controller")
     @Operation(summary = "API create room")
     @PostMapping(UrlConstant.Room.CREATE)
-    public ResponseEntity<?> createRoom(@Parameter(name = "principal", hidden = true) @CurrentUser UserPrincipal user,
-                                        @Valid @ModelAttribute RoomRequestDto createDto) {
+    public ResponseEntity<?> createRoom(@Parameter(name = "principal", hidden = true) @CurrentUser UserPrincipal user) {
         return VsResponseUtil.success(roomService.create(user.getId()));
-    }
-
-    @Tag(name = "room-controller")
-    @Operation(summary = "API delete room")
-    @DeleteMapping(UrlConstant.Room.DELETE)
-    public ResponseEntity<?> deleteRoom(@PathVariable String id) {
-        return VsResponseUtil.success(roomService.deleteById(id));
     }
 }

@@ -18,7 +18,6 @@ public class MessageRequestDto {
     @NotNull(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
     private String roomId;
 
-    @NotNull(message = ErrorMessage.INVALID_SOME_THING_FIELD_IS_REQUIRED)
     private String message;
 
     private List<MultipartFile> multipartFile;

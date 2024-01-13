@@ -14,6 +14,7 @@ import com.example.techstore.domain.mapper.RoomMapper;
 import com.example.techstore.exception.NotFoundException;
 import com.example.techstore.repository.RoomRepository;
 import com.example.techstore.repository.UserRepository;
+import com.example.techstore.repository.UserRoomRepository;
 import com.example.techstore.service.RoomService;
 import com.example.techstore.service.UserRoomService;
 import com.example.techstore.util.PaginationUtil;
@@ -32,6 +33,7 @@ public class RoomServiceImpl implements RoomService {
     private final UserRepository userRepository;
     private final RoomMapper roomMapper;
     private final UserRoomService userRoomService;
+    private final UserRoomRepository userRoomRepository;
 
     @Override
     public RoomDto getById(String id) {
@@ -66,12 +68,5 @@ public class RoomServiceImpl implements RoomService {
             userRoomService.create(room.getId(), user1.getId());
         }
         return roomMapper.mapRoomToRoomDto(room);
-    }
-
-    @Override
-    public CommonResponseDto deleteById(String id) {
-        Room room = roomRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(ErrorMessage.Room.ERR_NOT_FOUND_ID, new String[]{id}));
-        return new CommonResponseDto(true, MessageConstant.DELETE_ROOM_SUCCESSFULLY);
     }
 }

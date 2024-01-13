@@ -108,6 +108,7 @@ public class ErrorMessage {
 
     public static class Message {
         public static final String ERR_NOT_FOUND_ID = "exception.message.not.found.id";
+        public static final String ERR_NOT_FOUND_MESSAGE_OR_FILE = "exception.message.not.found.message.or.file";
     }
 
     public static class File {

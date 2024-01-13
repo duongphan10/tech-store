@@ -13,5 +13,4 @@ public interface UserRoomService {
 
     UserRoomDto create(String roomId, String userId);
 
-    CommonResponseDto deleteById(UserRoomId userRoomId);
 }

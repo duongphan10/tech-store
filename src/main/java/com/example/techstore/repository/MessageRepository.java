@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, String> {
-    @Query(value = "SELECT me.* FROM message me " +
+    @Query(value = "SELECT me.* FROM messages me " +
             "WHERE " +
             "   (?1 IS NULL OR me.room_id = ?1) " +
-            "   AND (?2 IS NULL OR me.meaage = ?2) ", nativeQuery = true)
+            "   AND (?2 IS NULL OR me.message = ?2) ", nativeQuery = true)
     Page<Message> getAll(String roomID, String message, Pageable pageable);
 }

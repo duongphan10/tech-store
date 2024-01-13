@@ -29,7 +29,7 @@ public class MessageController {
     @Tag(name = "message-controller")
     @Operation(summary = "API get all message by Page")
     @GetMapping(UrlConstant.Message.GET_ALL)
-    public ResponseEntity<?> getAllMessage(@RequestParam(required = false, defaultValue = "false") String roomId,
+    public ResponseEntity<?> getAllMessage(@RequestParam(required = false) String roomId,
                                            @RequestParam(required = false) String message,
                                            @Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
         return VsResponseUtil.success(messageService.getAll(roomId, message, paginationFullRequestDto));
@@ -40,6 +40,6 @@ public class MessageController {
     @PostMapping(UrlConstant.Message.CREATE)
     public ResponseEntity<?> createMessage(@Valid @ModelAttribute MessageRequestDto messageRequestDto,
                                            @Parameter(name = "principal", hidden = true) @CurrentUser UserPrincipal user) {
-        return VsResponseUtil.success(messageService.create(messageRequestDto));
+        return VsResponseUtil.success(messageService.create(user.getId(),messageRequestDto));
     }
 }
