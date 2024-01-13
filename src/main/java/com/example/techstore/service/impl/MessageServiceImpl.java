@@ -38,9 +38,9 @@ public class MessageServiceImpl implements MessageService {
     private final SocketIOServer server;
 
     @Override
-    public PaginationResponseDto<MessageDto> getAll(String roomId, String message, PaginationFullRequestDto paginationFullRequestDto) {
+    public PaginationResponseDto<MessageDto> getAll(String roomId, PaginationFullRequestDto paginationFullRequestDto) {
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.MESSAGE);
-        Page<Message> messagePage = messageRepository.getAll(roomId, message, pageable);
+        Page<Message> messagePage = messageRepository.getAll(roomId, pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.MESSAGE, messagePage);
 
@@ -62,7 +62,9 @@ public class MessageServiceImpl implements MessageService {
         if ((messageContent == null || messageContent.isEmpty()) && (multipartFiles == null || multipartFiles.isEmpty())) {
             throw new NotFoundException(ErrorMessage.Message.ERR_NOT_FOUND_MESSAGE_OR_FILE);
         }
-
+        if (messageContent != null && messageContent.isEmpty()) {
+            messageRequestDto.setMessage(null);
+        }
         Message me = new Message();
         me.setMessage(messageRequestDto.getMessage());
         me.setRoom(room);

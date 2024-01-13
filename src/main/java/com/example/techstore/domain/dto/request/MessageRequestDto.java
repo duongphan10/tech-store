@@ -1,6 +1,7 @@
 package com.example.techstore.domain.dto.request;
 
 import com.example.techstore.constant.ErrorMessage;
+import com.example.techstore.validator.annotation.ValidListFile;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,6 @@ public class MessageRequestDto {
 
     private String message;
 
+    @ValidListFile
     private List<MultipartFile> multipartFile;
 }

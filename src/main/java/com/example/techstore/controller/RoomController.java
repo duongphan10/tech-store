@@ -4,16 +4,14 @@ import com.example.techstore.base.RestApiV1;
 import com.example.techstore.base.VsResponseUtil;
 import com.example.techstore.constant.UrlConstant;
 import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
-import com.example.techstore.security.CurrentUser;
-import com.example.techstore.security.UserPrincipal;
 import com.example.techstore.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.validation.Valid;
 
@@ -36,10 +34,4 @@ public class RoomController {
         return VsResponseUtil.success(roomService.getAll(paginationFullRequestDto));
     }
 
-    @Tag(name = "room-controller")
-    @Operation(summary = "API create room")
-    @PostMapping(UrlConstant.Room.CREATE)
-    public ResponseEntity<?> createRoom(@Parameter(name = "principal", hidden = true) @CurrentUser UserPrincipal user) {
-        return VsResponseUtil.success(roomService.create(user.getId()));
-    }
 }

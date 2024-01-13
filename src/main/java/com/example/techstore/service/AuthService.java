@@ -1,7 +1,9 @@
 package com.example.techstore.service;
 
+import com.example.techstore.domain.dto.request.ForgotPasswordRequestDto;
 import com.example.techstore.domain.dto.request.LoginRequestDto;
 import com.example.techstore.domain.dto.request.TokenRefreshRequestDto;
+import com.example.techstore.domain.dto.request.VerifyRequestDto;
 import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.dto.response.LoginResponseDto;
 import com.example.techstore.domain.dto.response.TokenRefreshResponseDto;
@@ -18,5 +20,9 @@ public interface AuthService {
 
     CommonResponseDto logout(HttpServletRequest request,
                              HttpServletResponse response, Authentication authentication);
+
+    CommonResponseDto forgotPassword(ForgotPasswordRequestDto requestDto);
+
+    CommonResponseDto verifyForgotPassword(VerifyRequestDto verifyRequestDto);
 
 }

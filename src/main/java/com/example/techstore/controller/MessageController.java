@@ -30,9 +30,8 @@ public class MessageController {
     @Operation(summary = "API get all message by Page")
     @GetMapping(UrlConstant.Message.GET_ALL)
     public ResponseEntity<?> getAllMessage(@RequestParam(required = false) String roomId,
-                                           @RequestParam(required = false) String message,
                                            @Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
-        return VsResponseUtil.success(messageService.getAll(roomId, message, paginationFullRequestDto));
+        return VsResponseUtil.success(messageService.getAll(roomId, paginationFullRequestDto));
     }
 
     @Tag(name = "message-controller")
