@@ -40,9 +40,9 @@ public class UserRoomServiceImpl implements UserRoomService {
     }
 
     @Override
-    public PaginationResponseDto<UserRoomDto> getAll(String userId, String roomId, PaginationFullRequestDto paginationFullRequestDto) {
+    public PaginationResponseDto<UserRoomDto> getAll(String userId, PaginationFullRequestDto paginationFullRequestDto) {
         Pageable pageable = PaginationUtil.buildPageable(paginationFullRequestDto, SortByDataConstant.USER_ROOM);
-        Page<UserRoom> userRoomPage = userRoomRepository.getAll(userId, roomId, pageable);
+        Page<UserRoom> userRoomPage = userRoomRepository.getAll(userId, pageable);
         PagingMeta meta = PaginationUtil
                 .buildPagingMeta(paginationFullRequestDto, SortByDataConstant.MESSAGE, userRoomPage);
         List<UserRoomDto> userRoomDtos = userRoomMapper.mapUserRoomToUserRoomDto(userRoomPage.getContent());

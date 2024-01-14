@@ -54,7 +54,7 @@ public class MessageServiceImpl implements MessageService {
         Room room = roomRepository.findById(messageRequestDto.getRoomId())
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Room.ERR_NOT_FOUND_ID, new String[]{messageRequestDto.getRoomId()}));
         if (!userRoomRepository.existsUserRoomById(new UserRoomId(room.getId(), userId))) {
-            throw new NotFoundException(ErrorMessage.UserRoom.ERR_NOT_FOUND_ID, new String[]{messageRequestDto.getRoomId()});
+            throw new NotFoundException(ErrorMessage.UserRoom.ERR_USER_NOT_IN_ROOM, new String[]{userId,messageRequestDto.getRoomId()});
         }
 
         List<MultipartFile> multipartFiles = messageRequestDto.getMultipartFile();

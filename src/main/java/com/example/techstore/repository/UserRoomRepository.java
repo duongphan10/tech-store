@@ -22,9 +22,8 @@ public interface UserRoomRepository extends JpaRepository<UserRoom, UserRoomId> 
 
     @Query(value = "SELECT ur.* FROM user_rooms ur " +
             "WHERE " +
-            "   (?1 IS NULL OR ur.user_id= ?1) " +
-            "   AND (?2 IS NULL OR ur.name_id= ?2) ", nativeQuery = true)
-    Page<UserRoom> getAll(String userId, String roomId, Pageable pageable);
+            "   (?1 IS NULL OR ur.user_id= ?1) ", nativeQuery = true)
+    Page<UserRoom> getAll(String userId, Pageable pageable);
 
     Optional<UserRoom> findUserRoomByUser(User user);
 
