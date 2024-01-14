@@ -123,6 +123,7 @@ public class ErrorMessage {
     public static class UserRoom {
         public static final String ERR_NOT_FOUND_ID = "exception.user.room.not.found.id";
         public static final String ERR_ALREADY_EXIST = "exception.user.room.already.exist";
+        public static final String ERR_USER_NOT_IN_ROOM = "exception.message.user.not.in.room";
     }
 
     public static class Room {
