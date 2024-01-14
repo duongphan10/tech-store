@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,7 +29,8 @@ public class NewsController {
     }
 
     @Tag(name = "news-controller")
-    @Operation(summary = "API get all News by Page")
+    @Operation(summary = "API get all news")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(UrlConstant.News.GET_ALL)
     public ResponseEntity<?> getAllNews(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
         return VsResponseUtil.success(newsService.getAll(paginationFullRequestDto));
@@ -44,6 +46,7 @@ public class NewsController {
 
     @Tag(name = "news-controller")
     @Operation(summary = "API create news")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(UrlConstant.News.CREATE)
     public ResponseEntity<?> createNews(@Valid @ModelAttribute NewsRequestDto createDto) {
         return VsResponseUtil.success(newsService.create(createDto));
@@ -51,6 +54,7 @@ public class NewsController {
 
     @Tag(name = "news-controller")
     @Operation(summary = "API update news")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(UrlConstant.News.UPDATE)
     public ResponseEntity<?> updateNews(@PathVariable String id, @Valid @ModelAttribute NewsRequestDto updateDto) {
         return VsResponseUtil.success(newsService.update(id, updateDto));
@@ -58,6 +62,7 @@ public class NewsController {
 
     @Tag(name = "news-controller")
     @Operation(summary = "API delete news")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(UrlConstant.News.DELETE)
     public ResponseEntity<?> deleteNews(@PathVariable String id) {
         return VsResponseUtil.success(newsService.deleteById(id));

@@ -17,6 +17,7 @@ import com.example.techstore.exception.NotFoundException;
 import com.example.techstore.repository.*;
 import com.example.techstore.service.OrderDetailService;
 import com.example.techstore.service.OrderService;
+import com.example.techstore.service.UserDiscountService;
 import com.example.techstore.service.UserService;
 import com.example.techstore.util.PaginationUtil;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
     private final UserService userService;
     private final OrderMapper orderMapper;
     private final OrderDetailService orderDetailService;
+    private final UserDiscountService userDiscountService;
 
     @Override
     public OrderDto getById(String id, String userId) {
@@ -145,6 +147,12 @@ public class OrderServiceImpl implements OrderService {
         order.setTotalPrice(totalPrice);
         order.setStatus(statusRepository.getById(StatusConstant.PENDING.getId()));
         orderRepository.save(order);
+        if (shipDiscountCode != null) {
+            userDiscountService.update(shipDiscountCode.getId());
+        }
+        if (moneyDiscountCode != null) {
+            userDiscountService.update(moneyDiscountCode.getId());
+        }
         List<OrderDetail> orderDetails = new ArrayList<>();
         for (OrderProductRequestDto requestDto : orderCreateDto.getOrderProductRequestDtos()) {
             orderDetails.add(orderDetailService.create(order, requestDto));

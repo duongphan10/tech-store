@@ -49,12 +49,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public MessageDto create(String userId,MessageRequestDto messageRequestDto) {
+    public MessageDto create(String userId, MessageRequestDto messageRequestDto) {
 
         Room room = roomRepository.findById(messageRequestDto.getRoomId())
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Room.ERR_NOT_FOUND_ID, new String[]{messageRequestDto.getRoomId()}));
-        if(!userRoomRepository.existsUserRoomById(new UserRoomId(room.getId(), userId))){
-            throw new NotFoundException(ErrorMessage.UserRoom.ERR_NOT_FOUND_ID,new String[]{messageRequestDto.getRoomId()});
+        if (!userRoomRepository.existsUserRoomById(new UserRoomId(room.getId(), userId))) {
+            throw new NotFoundException(ErrorMessage.UserRoom.ERR_NOT_FOUND_ID, new String[]{messageRequestDto.getRoomId()});
         }
 
         List<MultipartFile> multipartFiles = messageRequestDto.getMultipartFile();

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,6 +45,7 @@ public class ProductController {
 
     @Tag(name = "product-controller")
     @Operation(summary = "API create product")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(UrlConstant.Product.CREATE)
     public ResponseEntity<?> createProduct(@Valid @ModelAttribute ProductRequestDto productRequestDto) {
         return VsResponseUtil.success(productService.create(productRequestDto));
@@ -51,6 +53,7 @@ public class ProductController {
 
     @Tag(name = "product-controller")
     @Operation(summary = "API update product by id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(UrlConstant.Product.UPDATE)
     public ResponseEntity<?> updateProductById(@PathVariable String id,
                                                @Valid @ModelAttribute ProductRequestDto productRequestDto) {
@@ -59,6 +62,7 @@ public class ProductController {
 
     @Tag(name = "product-controller")
     @Operation(summary = "API delete product by id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(UrlConstant.Product.DELETE)
     public ResponseEntity<?> deleteProductById(@PathVariable String id) {
         return VsResponseUtil.success(productService.deleteById(id));

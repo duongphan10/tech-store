@@ -7,7 +7,6 @@ import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
 import com.example.techstore.domain.dto.pagination.PaginationResponseDto;
 import com.example.techstore.domain.dto.pagination.PagingMeta;
 import com.example.techstore.domain.dto.request.UserDiscountCreateDto;
-import com.example.techstore.domain.dto.request.UserDiscountUpdateDto;
 import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.dto.response.UserDiscountDto;
 import com.example.techstore.domain.entity.DiscountCode;
@@ -26,6 +25,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -86,10 +86,10 @@ public class UserDiscountServiceImpl implements UserDiscountService {
     }
 
     @Override
-    public UserDiscountDto update(String id, UserDiscountUpdateDto updateDto) {
+    public UserDiscountDto update(String id) {
         UserDiscount userDiscount = userDiscountRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.UserDiscount.ERR_NOT_FOUND_ID, new String[]{id}));
-        userDiscountMapper.updateUserDiscount(userDiscount, updateDto);
+        userDiscount.setAppliedDate(LocalDateTime.now());
         userDiscount.setStatus(false);
         return userDiscountMapper.mapUserDiscountToUserDiscountDto(userDiscountRepository.save(userDiscount));
     }

@@ -132,7 +132,6 @@ public class UrlConstant {
         public static final String GET_BY_USER_ID = PRE_FIX + "/all/me";
         public static final String CREATE = PRE_FIX + "/create";
         public static final String ADD = PRE_FIX + "/add";
-        public static final String UPDATE = PRE_FIX + "/{id}";
         public static final String DELETE = PRE_FIX + "/{id}";
 
         private UserDiscount() {

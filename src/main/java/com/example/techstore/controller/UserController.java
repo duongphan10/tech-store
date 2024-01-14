@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,6 +45,7 @@ public class UserController {
 
     @Tag(name = "user-controller")
     @Operation(summary = "API get all user")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(UrlConstant.User.GET_ALL)
     public ResponseEntity<?> getAllUser(@Valid @ParameterObject PaginationFullRequestDto requestDTO) {
         return VsResponseUtil.success(userService.getAll(requestDTO));
@@ -85,6 +87,7 @@ public class UserController {
 
     @Tag(name = "user-controller")
     @Operation(summary = "API delete user by id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(UrlConstant.User.DELETE)
     public ResponseEntity<?> deleteUserById(@PathVariable String userId) {
         return VsResponseUtil.success(userService.deleteById(userId));

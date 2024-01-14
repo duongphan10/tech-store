@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,6 +36,7 @@ public class OrderController {
 
     @Tag(name = "order-controller")
     @Operation(summary = "API get all order")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(UrlConstant.Order.GET_ALL)
     public ResponseEntity<?> getAllOrder(@Valid @ParameterObject PaginationFullRequestDto paginationFullRequestDto) {
         return VsResponseUtil.success(orderService.getAll(paginationFullRequestDto));
@@ -60,6 +62,7 @@ public class OrderController {
 
     @Tag(name = "order-controller")
     @Operation(summary = "API update order by id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(UrlConstant.Order.UPDATE)
     public ResponseEntity<?> updateOrderById(@PathVariable String id,
                                              @Valid @RequestBody OrderUpdateDto orderUpdateDto) {
@@ -68,6 +71,7 @@ public class OrderController {
 
     @Tag(name = "order-controller")
     @Operation(summary = "API delete order by id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(UrlConstant.Order.DELETE)
     public ResponseEntity<?> deleteOrderById(@PathVariable String id) {
         return VsResponseUtil.success(orderService.deleteById(id));
