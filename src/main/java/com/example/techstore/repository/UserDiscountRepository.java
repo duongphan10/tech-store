@@ -11,10 +11,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDiscountRepository extends JpaRepository<UserDiscount, String> {
+
     @Query(value = "SELECT * FROM user_discounts ud " +
             "WHERE " +
             "   ud.user_id = ?1 AND ud.discount_id = ?2 ", nativeQuery = true)
-    UserDiscount getByUserIdAndDiscountCodeId(String userId, String discountcodeId);
+    UserDiscount getByUserIdAndDiscountCodeId(String userId, String discountCodeId);
 
     @Query(value = "SELECT ud.* FROM user_discounts ud " +
             "WHERE ?1 IS NULL OR ud.status = ?1 ", nativeQuery = true)

@@ -24,4 +24,8 @@ public class MessageConstant {
     public static final String DELETE_USER_DISCOUNT_SUCCESSFULLY = "You successfully deleted the user discount";
     public static final String DELETE_ORDER_SUCCESSFULLY = "You successfully deleted the order";
     public static final String DELETE_REVIEW_SUCCESSFULLY = "You successfully deleted the review";
+    public static final String DELETE_USER_ROOM_SUCCESSFULLY = "You successfully deleted the user room";
+    public static final String DELETE_ROOM_SUCCESSFULLY = "You successfully deleted the room";
+    public static final String DELETE_MESSAGE_SUCCESSFULLY = "You successfully deleted the message";
+    public static final String DELETE_FILE_SUCCESSFULLY = "You successfully deleted the file";
 }

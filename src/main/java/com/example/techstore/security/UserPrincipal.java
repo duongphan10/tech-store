@@ -2,6 +2,7 @@ package com.example.techstore.security;
 
 import com.example.techstore.domain.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,8 +11,10 @@ import java.util.*;
 
 public class UserPrincipal implements UserDetails {
 
+    @Getter
     private final String id;
 
+    @Getter
     private final String fullName;
 
     @JsonIgnore

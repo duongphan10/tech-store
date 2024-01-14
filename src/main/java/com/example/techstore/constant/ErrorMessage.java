@@ -111,4 +111,21 @@ public class ErrorMessage {
         public static final String ERR_ALREADY_EXIST_WITH_ORDER_DETAIL = "exception.review.already.exist.with.order.detail";
     }
 
+    public static class Message {
+        public static final String ERR_NOT_FOUND_ID = "exception.message.not.found.id";
+        public static final String ERR_NOT_FOUND_MESSAGE_OR_FILE = "exception.message.not.found.message.or.file";
+    }
+
+    public static class File {
+        public static final String ERR_NOT_FOUND_ID = "exception.file.not.found.id";
+    }
+
+    public static class UserRoom {
+        public static final String ERR_NOT_FOUND_ID = "exception.user.room.not.found.id";
+        public static final String ERR_ALREADY_EXIST = "exception.user.room.already.exist";
+    }
+
+    public static class Room {
+        public static final String ERR_NOT_FOUND_ID = "exception.room.not.found.id";
+    }
 }

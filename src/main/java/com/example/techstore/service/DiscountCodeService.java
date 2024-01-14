@@ -7,6 +7,7 @@ import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.dto.response.DiscountCodeDto;
 
 public interface DiscountCodeService {
+
     DiscountCodeDto getById(String id);
 
     PaginationResponseDto<DiscountCodeDto> getAll(Boolean type, PaginationFullRequestDto paginationFullRequestDto);
@@ -16,4 +17,5 @@ public interface DiscountCodeService {
     DiscountCodeDto update(String id, DiscountCodeRequestDto updateDto);
 
     CommonResponseDto deleteById(String id);
+
 }

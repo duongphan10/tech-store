@@ -79,4 +79,15 @@ public class User extends DateAuditing {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Code code;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_rooms",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id")
+    )
+    private List<Room> rooms;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserRoom> userRooms;
+
 }

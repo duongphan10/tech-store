@@ -17,6 +17,7 @@ import com.example.techstore.exception.NotFoundException;
 import com.example.techstore.repository.RoleRepository;
 import com.example.techstore.repository.UserRepository;
 import com.example.techstore.security.UserPrincipal;
+import com.example.techstore.service.RoomService;
 import com.example.techstore.service.UserService;
 import com.example.techstore.util.PaginationUtil;
 import com.example.techstore.util.UploadFileUtil;
@@ -36,6 +37,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final UploadFileUtil uploadFileUtil;
+    private final RoomService roomService;
 
     public User getById(String userId) {
         return userRepository.findById(userId)
@@ -88,6 +90,8 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
         user.setRole(roleRepository.findByName(RoleConstant.USER));
         user.setEnabled(true);
+        userRepository.save(user);
+        roomService.create(user.getId());
         return userMapper.mapUserToUserDto(userRepository.save(user));
     }
 

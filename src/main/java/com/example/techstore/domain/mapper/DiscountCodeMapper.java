@@ -13,7 +13,6 @@ public interface DiscountCodeMapper {
     @Mappings({
             @Mapping(target = "startDate", source = "startDate", dateFormat = CommonConstant.PATTERN_DATE_TIME),
             @Mapping(target = "expirationDate", source = "expirationDate", dateFormat = CommonConstant.PATTERN_DATE_TIME)
-
     })
     DiscountCode mapDiscountCodeRequestDtoToDiscountCode(DiscountCodeRequestDto createDto);
 
