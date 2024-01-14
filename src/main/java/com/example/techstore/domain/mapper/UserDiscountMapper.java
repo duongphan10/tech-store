@@ -1,11 +1,12 @@
 package com.example.techstore.domain.mapper;
 
-import com.example.techstore.constant.CommonConstant;
 import com.example.techstore.domain.dto.request.UserDiscountCreateDto;
-import com.example.techstore.domain.dto.request.UserDiscountUpdateDto;
 import com.example.techstore.domain.dto.response.UserDiscountDto;
 import com.example.techstore.domain.entity.UserDiscount;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
@@ -25,9 +26,4 @@ public interface UserDiscountMapper {
 
     List<UserDiscountDto> mapUserDiscountToUserDiscountDto(List<UserDiscount> userDiscounts);
 
-    @Mappings({
-            @Mapping(target = "appliedDate", source = "appliedDate", dateFormat = CommonConstant.PATTERN_DATE_TIME)
-
-    })
-    void updateUserDiscount(@MappingTarget UserDiscount userDiscount, UserDiscountUpdateDto updateDto);
 }

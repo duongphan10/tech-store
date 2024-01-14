@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,6 +36,7 @@ public class ProductOptionController {
 
     @Tag(name = "product-option-controller")
     @Operation(summary = "API create option of product")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(UrlConstant.Product.CREATE_OPTION)
     public ResponseEntity<?> createProductOption(@Valid @ModelAttribute ProductOptionCreateDto productOptionCreateDto) {
         return VsResponseUtil.success(productOptionService.create(productOptionCreateDto));
@@ -42,6 +44,7 @@ public class ProductOptionController {
 
     @Tag(name = "product-option-controller")
     @Operation(summary = "API update product option by id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(UrlConstant.Product.UPDATE_OPTION)
     public ResponseEntity<?> updateProductOptionById(@PathVariable String id,
                                                      @Valid @ModelAttribute ProductOptionUpdateDto productOptionUpdateDto) {
@@ -50,6 +53,7 @@ public class ProductOptionController {
 
     @Tag(name = "product-option-controller")
     @Operation(summary = "API delete product option by id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(UrlConstant.Product.DELETE_OPTION)
     public ResponseEntity<?> deleteProductOptionById(@PathVariable String id) {
         return VsResponseUtil.success(productOptionService.deleteById(id));

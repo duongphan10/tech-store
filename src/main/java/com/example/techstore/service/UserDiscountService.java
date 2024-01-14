@@ -3,7 +3,6 @@ package com.example.techstore.service;
 import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
 import com.example.techstore.domain.dto.pagination.PaginationResponseDto;
 import com.example.techstore.domain.dto.request.UserDiscountCreateDto;
-import com.example.techstore.domain.dto.request.UserDiscountUpdateDto;
 import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.dto.response.UserDiscountDto;
 
@@ -16,7 +15,7 @@ public interface UserDiscountService {
 
     UserDiscountDto create(String userId, UserDiscountCreateDto createDto);
 
-    UserDiscountDto update(String id, UserDiscountUpdateDto updateDto);
+    UserDiscountDto update(String id);
 
     UserDiscountDto addDiscountCode(String userId, String code);
 

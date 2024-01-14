@@ -2,7 +2,6 @@ package com.example.techstore.service;
 
 import com.example.techstore.domain.dto.pagination.PaginationFullRequestDto;
 import com.example.techstore.domain.dto.pagination.PaginationResponseDto;
-import com.example.techstore.domain.dto.response.CommonResponseDto;
 import com.example.techstore.domain.dto.response.UserRoomDto;
 import com.example.techstore.domain.entity.UserRoomId;
 

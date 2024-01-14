@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,6 +41,7 @@ public class AddressController {
 
     @Tag(name = "address-controller")
     @Operation(summary = "API get all address by user id")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(UrlConstant.Address.GET_ALL_BY_USE_ID)
     public ResponseEntity<?> getAllAddressByUserId(@PathVariable String userId) {
         return VsResponseUtil.success(addressService.getAllByUserId(userId));
