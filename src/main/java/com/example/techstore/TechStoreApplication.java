@@ -37,9 +37,9 @@ public class TechStoreApplication {
         return args -> {
             //init role
             if (roleRepository.count() == 0) {
-                roleRepository.save(new Role(null, RoleConstant.USER, null, null));
-                roleRepository.save(new Role(null, RoleConstant.ADMIN, null, null));
-                roleRepository.save(new Role(null, RoleConstant.SUPPORT, null, null));
+                roleRepository.save(new Role(1, RoleConstant.USER, null, null));
+                roleRepository.save(new Role(2, RoleConstant.ADMIN, null, null));
+                roleRepository.save(new Role(3, RoleConstant.SUPPORT, null, null));
             }
             //init status
             if (statusRepository.count() == 0) {
